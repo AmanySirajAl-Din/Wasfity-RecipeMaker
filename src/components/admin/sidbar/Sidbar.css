@@ -1,0 +1,20 @@
+.sidbar-container{
+    width:300px;
+    min-height:1200px;
+   
+}
+.sidbar-container ul{
+    margin: 0px;
+    padding: 0px;
+}
+.sidbar-container li{
+    list-style: none;
+   color:  #1b1a16;
+    padding: 20px;
+    padding-left:10px;
+    
+    text-align: left;
+    font-size: large;
+    background-color: rgb(241, 241, 247);
+  
+}

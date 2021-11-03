@@ -1,27 +1,47 @@
 import logo from './logo.svg';
 import './App.css';
 import Footer  from './components/admin/footer/Footer';
-import  NavbarSection  from './components/admin/Navbar/Navbar';
-
-import { initializeApp } from "firebase/app"
 import Sidbar from './components/admin/sidbar/Sidbar'
-
 import {useEffect} from 'react'
 import{db} from './firebase'
 import { collection, getDocs,onSnapshot } from'firebase/firestore'
+import Navbar from './components/admin/Navbar/Navbar';
+import Recipes from './pages/admin/recipes/Recipes';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 
 function App() {
-  useEffect(() => {
-    onSnapshot(collection(db,'recipes'),(snapshot)=>
-    console.log(snapshot.docs.map(doc=>doc.data())));
-   
-  });
+  
 
   return (
     <div className="App">
-      {/* <NavbarSection/> */}
-      <Sidbar/>
-     <Footer/>
+      
+    <Router>
+      <div>
+      <div className="d-flex">
+        <div > <Sidbar /></div>
+        <div> <Navbar />
+        <div className="ms-4 ">
+        <Switch>
+          <Route  exact path="/R" 
+          component={Recipes}>
+          </Route>
+          
+        </Switch>
+        </div>
+        </div>
+        
+        </div>
+        
+      </div>
+      
+      
+       
+      <Footer/>
+    </Router>
+
+        
+      
     </div>
   );
 }

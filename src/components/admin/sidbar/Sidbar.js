@@ -4,7 +4,7 @@ import logo from '../../../assets/img/كومبو بيتي PROFILE PIC.psdye 1.pn
 
 export default function Sidbar() {
     return (
-        <div className="sidbar-container" >
+        <div className="sidbar-container bg-light" >
         <ul>
         <img src={logo} width="120px"/>
         <hr/>

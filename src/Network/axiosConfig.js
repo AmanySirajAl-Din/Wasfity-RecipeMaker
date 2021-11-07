@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Loader from '../Loader';
 
 const axiosInstance = axios.create({
   baseURL: "https://fakestoreapi.com",
@@ -10,7 +11,8 @@ axiosInstance.interceptors.request.use(function (config) {
     config.headers = {
         'Accept-language' : 'fr'
     }
-    console.log("SHOW LOADER");
+    
+    Loader();
     // Do something before request is sent
     return config;
   }, function (error) {

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Recipes.css";
+import "./Ingredients.css";
 import { useEffect, useState } from "react";
 import { db } from "../../../firebase";
 import {  Link } from "react-router-dom";
@@ -14,19 +14,19 @@ import {
   deleteDoc
 } from "firebase/firestore";
 
-export default function Recipes() {
-  const [recipes, setRecipes] = useState([]);
+export default function Ingredients() {
+  const [Ingredients, setIngredients] = useState([]);
   // console.log(recipes);
   useEffect(
     () =>
-      onSnapshot(collection(db, "recipes"), (snapshot) =>
-        setRecipes(snapshot.docs.map((doc) =>({...doc.data(),id:doc.id}) ))
+      onSnapshot(collection(db, "Ingredients"), (snapshot) =>
+      setIngredients(snapshot.docs.map((doc) =>({...doc.data(),id:doc.id}) ))
       ),
     []
   );
 
   const editRecipe = async (id) => {
-    const docRef = doc(db, "recipes", id);
+    const docRef = doc(db, "Ingredients", id);
     const payload = {
       Title: "عنب",
       DegreeOfDifficulty: "سهل",
@@ -40,7 +40,7 @@ export default function Recipes() {
      console.log(  setDoc(docRef, payload).id)
   };
   const addRecipe = async () => {
-    const collectionRef = collection(db, "recipes");
+    const collectionRef = collection(db, "Ingredients");
     const payload = {
       Title: "محشي",
       DegreeOfDifficulty: "سهل",
@@ -59,12 +59,12 @@ export default function Recipes() {
   };
 
   return (
-    <div className="Recipe-container">
+    <div className="Ingredient-container">
       <nav class="navbar ">
         <div class="container-fluid">
           <a class="navbar-brand heading-word ">Recipes</a>
           <div class="d-flex">
-            <Link to="addRecipe">
+            <Link to="AddIngredients">
               <button class="btn btn-outline-warning" >
                 Add
               </button>
@@ -85,20 +85,16 @@ export default function Recipes() {
           </tr>
         </thead>
         <tbody>
-          {recipes.map((recipe) => {
+          {Ingredients.map((Ingredient) => {
             return (
               <tr>
-                <th key={recipe.id} scope="row">
+                <th key={Ingredient.id} scope="row">
                   1
                 </th>
-                <td>{recipe.Title}</td>
-                <td>{recipe.DegreeOfDifficulty}</td>
-                <td>@mdo</td>
-                <td>{recipe.DegreeOfDifficulty}</td>
-                <td>@mdo</td>
-                <td>{recipe.DegreeOfDifficulty}</td>
-                <td><button onClick={()=>editRecipe(recipe.id)}>Edit</button></td>
-                <td><button onClick={()=>deleteRecipe(recipe.id)}>Delete</button></td>
+                <td>{Ingredient.ingName}</td>
+            
+                <td><button onClick={()=>editRecipe(Ingredient.id)}>Edit</button></td>
+                <td><button onClick={()=>deleteRecipe(Ingredient.id)}>Delete</button></td>
               </tr>
             );
           })}

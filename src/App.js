@@ -21,6 +21,10 @@ function App() {
   return (
     <div className='App'>
       {/* <Router>
+    <div className="App">
+      
+    <Router>
+>>>>>>> 60f30efb2856184607216efcdb06be5bd1265fcf
       <div>
       <div className="d-flex">
         <div > <Sidbar /></div>
@@ -58,6 +62,9 @@ function App() {
       
       
       <Footer/>
+    </Router> */}
+
+      {/* <Footer/>
     </Router> */}
 
       <Home />

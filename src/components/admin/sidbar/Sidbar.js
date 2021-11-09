@@ -1,8 +1,14 @@
 import React from "react";
 import "./Sidbar.css";
+<<<<<<< HEAD
 import logo from "../../../assets/img/logo.png";
 import { DropdownButton, Accordion } from "react-bootstrap";
 // import Category_of_recipes from "./../../../pages/admin/category_of_recipes/Category_of_recipes";
+=======
+import logo from "../../../assets/img/كومبو بيتي PROFILE PIC.psdye 1.png";
+import { DropdownButton, Accordion } from "react-bootstrap";
+import Category_of_recipes from "./../../../pages/admin/category_of_recipes/Category_of_recipes";
+>>>>>>> 60f30efb2856184607216efcdb06be5bd1265fcf
 import { Link } from "react-router-dom";
 
 export default function Sidbar() {

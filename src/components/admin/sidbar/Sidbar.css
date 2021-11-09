@@ -1,0 +1,38 @@
+.sidbar-container{
+    width:250px;
+    min-height:600px;
+    background-color: #F2EEEE !important;
+   
+}
+.sidbar-container ul{
+    margin: 0px;
+    padding: 0px;
+    background-color: #F2EEEE !important;
+}
+.sidbar-container li{
+    list-style: none;
+    color: #0f0b03;
+    padding: 2px;
+    padding-left:10px;
+   
+    text-align: left;
+    font-size: large;
+    
+  
+}
+.sidbar-container li:hover{
+    color: #F8AB15;
+}
+li svg{
+    color: #F8AB15;
+}
+.accordion-button{
+    background-color: #F2EEEE !important;
+}
+a{
+    text-decoration: none !important;
+    color: #000 !important;
+}
+a:hover{
+    color: #F8AB15 !important;
+}

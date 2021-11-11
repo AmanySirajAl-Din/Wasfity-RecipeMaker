@@ -1,6 +1,5 @@
 .hero__container {
   padding: 2rem 1rem;
-  width: 100%;
 }
 
 .hero {
@@ -56,12 +55,6 @@
 @media (max-width: 1024px) {
   .hero {
     grid-template-areas: 'main main main main' 'left left right right';
-  }
-
-  .meal,
-  .hero__main {
-    width: 85%;
-    margin: 0 auto;
   }
 }
 

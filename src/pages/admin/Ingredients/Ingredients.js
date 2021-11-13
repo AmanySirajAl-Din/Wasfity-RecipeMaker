@@ -39,21 +39,10 @@ export default function Ingredients() {
      await setDoc(docRef, payload);
      console.log(  setDoc(docRef, payload).id)
   };
-  const addRecipe = async () => {
-    const collectionRef = collection(db, "Ingredients");
-    const payload = {
-      Title: "محشي",
-      DegreeOfDifficulty: "سهل",
-      Evaluation: 5,
-      Photo: "gggggg",
-      TimePreper: "7hours",
-      Video: "jkjjjjjjj",
-      ReciprPrepare: "iii",
-    };
-    await addDoc(collectionRef, payload);
-  };
+  
+
   const deleteRecipe = async (id) => {
-    const docRef = doc(db, "recipes", id);
+    const docRef = doc(db, "Ingredients", id);
      await deleteDoc(docRef);
      console.log(  deleteDoc(docRef).id)
   };
@@ -62,7 +51,7 @@ export default function Ingredients() {
     <div className="Ingredient-container">
       <nav class="navbar ">
         <div class="container-fluid">
-          <a class="navbar-brand heading-word ">Recipes</a>
+          <a class="navbar-brand heading-word ">Ingredients</a>
           <div class="d-flex">
             <Link to="AddIngredients">
               <button class="btn btn-outline-warning" >
@@ -78,10 +67,11 @@ export default function Ingredients() {
       <table class="table Recipe-container  text-black table-hover">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -89,11 +79,16 @@ export default function Ingredients() {
             return (
               <tr>
                 <th key={Ingredient.id} scope="row">
-                  1
+                {Ingredient.id}
                 </th>
                 <td>{Ingredient.ingName}</td>
+                <td>{Ingredient.ingName}</td>
             
-                <td><button onClick={()=>editRecipe(Ingredient.id)}>Edit</button></td>
+                <td>
+                  <Link to="/EditIngredients">
+                  <button onClick={()=>editRecipe(Ingredient.id)}>Edit</button>
+                  </Link>
+                </td>
                 <td><button onClick={()=>deleteRecipe(Ingredient.id)}>Delete</button></td>
               </tr>
             );

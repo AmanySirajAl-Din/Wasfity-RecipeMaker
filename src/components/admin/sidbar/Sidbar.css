@@ -2,6 +2,7 @@
     width:250px;
     min-height:600px;
     background-color: #F2EEEE !important;
+    box-shadow: 10px 10px 5px rgb(202, 197, 197);
    
 }
 .sidbar-container ul{
@@ -19,6 +20,11 @@
     font-size: large;
     
   
+}
+.dashboard{
+    padding: 50px !important;
+    text-align: center;
+    padding-bottom: 20px !important;
 }
 .sidbar-container li:hover{
     color: #F8AB15;

@@ -2,22 +2,19 @@ import React from "react";
 import "./Ingredients.css";
 import { useEffect, useState } from "react";
 import { db } from "../../../firebase";
+import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 import {
   collection,
   onSnapshot,
-  addDoc,
-  getDocs,
-  where,
-  query,
-  
+  addDoc 
   
 } from "firebase/firestore";
 
 export default function AddIngredients() {
   const history = useHistory();
-  const [Category_of_ingredients, setCatIngred] = useState([]);
+  const [Category_of_ingredients, setCatingred] = useState([]);
   const [ingredientName, setIngredientName] = useState("");
   const [categoryId, setCategoryId] = useState("");
 
@@ -25,22 +22,19 @@ export default function AddIngredients() {
   useEffect(
     () =>
       onSnapshot(collection(db, "Categories_for_ingredients"), (snapshot) =>
-      setCatIngred(snapshot.docs.map((doc) =>({...doc.data(),id:doc.id}) ))
+      setCatingred(snapshot.docs.map((doc) =>({...doc.data(),id:doc.id}) ))
       ),
     []
   );
   
-  const AddHandel = (e) => {
+  const editHandel = (e) => {
     e.preventDefault();
-      //  console.log("add")
-
-         addDoc(collection(db, "Ingredients"), {
-           
-        ingName:ingredientName,
-        categoryId:categoryId
-     
-    })
- 
+        const docRef = doc(db, "Ingredients", id);
+        const payload = {
+            ingName:ingredientName,
+            categoryId:categoryId
+        };
+       setDoc(docRef, payload)
       .then(() => {
         alert("ingredient Added successefuly thum");
         return  history.push("/Ingredients")
@@ -52,7 +46,7 @@ export default function AddIngredients() {
   };
   return (
     <div className=" add-ingredient ">
-      <form className="form add-ingredient" onSubmit={AddHandel}>
+      <form className="form add-ingredient" onSubmit={editHandel}>
         <div className="mt-4 p-5" dir="rtl">
           <h1 className="text-center text-black">اضافة مكون</h1>
           <div className="form-group text-right">
@@ -113,9 +107,8 @@ export default function AddIngredients() {
           </div>
           
           <button  className="btn btn-dark">
-            اضف
+           حفظ
           </button>
-          
           
         </div>
       </form>

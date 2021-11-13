@@ -64,8 +64,8 @@ export default function Categories_for_ingredients() {
       <hr />
 
       <table class="table RecipeCat-container  text-black table-hover">
-        <thead>
-          <tr>
+        <thead className="head-table">
+          <tr >
             <th scope="col">#</th>
             <th scope="col">First</th>
             <th scope="col">Last</th>

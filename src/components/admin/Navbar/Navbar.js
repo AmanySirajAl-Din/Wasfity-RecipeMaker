@@ -1,11 +1,11 @@
 import React from "react";
 import "./Navbar.css";
-import logo from "../../../assets/img/كومبو بيتي PROFILE PIC.psdye 1.png";
+import logo from "../../../assets/img/logo.png";
 
 export default function Navbar() {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-container">
+      <nav className="navbar navbar-expand-lg navbar-container container-fluid">
         <div className="container-fluid">
           <button
             className="navbar-toggler"
@@ -20,12 +20,12 @@ export default function Navbar() {
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
             <a className="navbar-brand" href="#">
-              Hidden brand
+            <img src={logo}  with="100"/>
             </a>
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <a className="nav-link active" aria-current="page" href="#">
-                  Home
+                  {/* <img src={logo} width="150"height="150"/> */}
                 </a>
               </li>
               <li className="nav-item">

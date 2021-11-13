@@ -2,10 +2,11 @@ import React from "react";
 import { db } from "../../../firebase";
 import { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 
 export default function AddRecipeCat() {
   const [recipeCatName, setRecipeCatName] = useState("");
+  const history=useHistory();
 
   const AddRecpCatHandel = (e) => {
     e.preventDefault();
@@ -14,6 +15,7 @@ export default function AddRecipeCat() {
     })
       .then(() => {
         alert("Recipe Added successefuly 👍");
+        return  history.push("/RC")
       })
       .catch((error) => {
         alert(error.message);

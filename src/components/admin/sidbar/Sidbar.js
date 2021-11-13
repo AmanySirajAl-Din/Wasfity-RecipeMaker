@@ -1,6 +1,5 @@
 import React from "react";
 import "./Sidbar.css";
-import logo from "../../../assets/img/كومبو بيتي PROFILE PIC.psdye 1.png";
 import { DropdownButton, Accordion } from "react-bootstrap";
 import Category_of_recipes from "./../../../pages/admin/category_of_recipes/Category_of_recipes";
 import { Link } from "react-router-dom";
@@ -9,9 +8,7 @@ export default function Sidbar() {
   return (
     <div className="sidbar-container bg-light">
       <ul>
-        <img src={logo} width="120px" />
-        <hr />
-        <li>
+      <li className="dashboard">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -28,6 +25,8 @@ export default function Sidbar() {
           </svg>{" "}
           Dashboard
         </li>
+        <hr />
+       
 
         <Accordion>
           <li>
@@ -122,7 +121,7 @@ export default function Sidbar() {
                   <Link to="IC">Category</Link>
                 </li>
                 <li>
-                  <Link to="addRecipeCat">Add Category</Link>
+                  <Link to="AddIngredCat">Add Category</Link>
                 </li>
               </Accordion.Body>
             </Accordion.Item>

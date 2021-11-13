@@ -24,11 +24,13 @@ function App() {
     <div className="App">
       
     <Router>
+      
       <div>
+      <div> <Navbar />
       <div className="d-flex">
         <div > <Sidbar /></div>
-        <div> <Navbar />
-        <div className="ms-4 ">
+      
+        <div className="m-auto mt-1 app-container">
         <Switch>
           <Route  exact path="/R" 
           component={Recipes}>
@@ -49,6 +51,8 @@ function App() {
           <Route  exact path="/Ingredients"  component={Ingredients}>
           </Route>
           <Route  exact path="/AddIngredients"  component={AddIngredients}>
+          </Route>
+          <Route  exact path="/EditIngredients"  component={AddIngredients}>
           </Route>
           
         </Switch>

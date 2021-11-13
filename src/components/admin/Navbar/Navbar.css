@@ -1,9 +1,8 @@
 
   .navbar-container{
-    width:1205px;
-    border: 2px solid #F8AB15 ;
+   
     
-    
+    box-shadow: 10px 10px 5px rgb(202, 197, 197);
     background-color:#F2EEEE;
     margin-bottom: 40px;
 

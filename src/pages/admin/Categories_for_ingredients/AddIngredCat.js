@@ -2,10 +2,12 @@ import React from "react";
 import { db } from "../../../firebase";
 import { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
-import { Link } from "react-router-dom";
+import './Categories_for_ingredients.css'
+import {useHistory} from "react-router-dom";
 
 export default function AddIngredCat() {
   const [ingerdCatName, setIngredCatName] = useState("");
+  const history=useHistory();
 
   const AddIngredCatHandel = (e) => {
     e.preventDefault();
@@ -14,6 +16,7 @@ export default function AddIngredCat() {
     })
       .then(() => {
         alert("Recipe Added successefuly 👍");
+        return  history.push("/IC")
       })
       .catch((error) => {
         alert(error.message);
@@ -54,7 +57,7 @@ export default function AddIngredCat() {
           </div>
           <div>
             {/* <Link to="RC"> */}
-              <button type="button " className="btn btn-warning my-4">
+              <button type="button " className="btn btn-dark  my-4">
                 اضف
               </button>
             {/* </Link> */}

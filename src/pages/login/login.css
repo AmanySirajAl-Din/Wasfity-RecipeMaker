@@ -18,8 +18,9 @@
 
 .loginBox{
     display: flex;
+    width: 60rem;
     flex-direction: column;
-    padding: 5rem 3.5rem;
+    padding: 2rem 5rem;
     background-color: #F8AB15;
     border-radius: 50px;
 }
@@ -51,6 +52,11 @@
     border: none;
     outline: none;
 }
+.social-login{
+    text-align: center;
+    
+}
+
 
 .email,
 .password{
@@ -84,7 +90,7 @@
     padding: .7rem 0;
     border-radius: 10px;
     font-size: 1.1rem;
-    margin: 1.5rem 0 .5rem;
+    margin: .2rem 0 .5rem;
     border: none;
     outline: none;
 }
@@ -95,7 +101,36 @@
     align-items: center;
     font-size: .9rem;
 }
+.facebook-btn{
+    background-color:   #314879;
+    color: #FFFFFF;
+}
+i {
+    padding-right: 1rem;
+}
 
 .signup :first-child { color: #FFFFFF; }
 
 .signup :last-child { color: #3E3E3E; }
+
+
+
+
+
+
+
+@media( max-width:1198px){
+    .container{
+        width: 40%
+    }
+    .loginBox{
+        display: flex;
+        width: 40% !important;
+        height: 30rem !important;
+        flex-direction: column;
+        padding: 2rem 5rem;
+        background-color: #F8AB15;
+        border-radius: 50px;
+    }
+
+}

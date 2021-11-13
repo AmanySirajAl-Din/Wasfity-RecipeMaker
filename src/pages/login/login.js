@@ -105,35 +105,11 @@ function Login() {
 
         <section className="loginBox">
           <h2 className="login__title">Login</h2>
-          <p className="login__text">
-            Log in with yout data that you entered during yout registration
-          </p>
 
           {/* Email */}
           <form className="login__form" onSubmit={(e) => submitForm(e)}>
             {/* Social Login {*/}
-            <div className="social-login">
-              <button
-                className="btn google-btn social-btn"
-                style={{ background: "red", marginBottom: "1.5rem" }}
-                type="button"
-                onClick={(e) => GoogleSignin(e)}
-              >
-                <span>
-                  <i className="fab fa-google-plus-g">Sign in with google+</i>
-                </span>
-              </button>
-              <button
-                className="btn facebook-btn social-btn"
-                style={{ background: "blue" }}
-                type="button"
-                onClick={(e) => FBSignin(e)}
-              >
-                <span>
-                  <i className="fab fa-facebook-f">Sign in with Facebook</i>
-                </span>
-              </button>
-            </div>
+           
             {/* } */}
             <label for="email" className="emailLabel">
               Your email <br />
@@ -176,6 +152,29 @@ function Login() {
               <a className="forgotPassword" href={url}>
                 forgot Password?
               </a>
+            </div>
+            <div className="social-login ">
+              <button
+                className="btn google-btn social-btn login__btn"
+                style={{ background: "red", marginBottom: "1.5rem" }}
+                type="button"
+                onClick={(e) => GoogleSignin(e)}
+              >
+                <span>
+                  <i className="fab fa-google-plus-g"> </i>
+                  Continue with google+
+                </span>
+              </button>
+              <button
+                className="btn facebook-btn social-btn login__btn"
+                type="button"
+                onClick={(e) => FBSignin(e)}
+              >
+                <span>
+                  <i className="fab fa-facebook-f "></i>
+                  Continue with Facebook
+                </span>
+              </button>
             </div>
             <button className="login__btn">Log in</button>
           </form>

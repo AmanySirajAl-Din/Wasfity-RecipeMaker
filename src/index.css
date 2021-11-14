@@ -17,6 +17,14 @@ code {
     monospace;
 }
 
+a {
+  text-decoration: none !important;
+}
+
+ul {
+  list-style: none !important;
+}
+
 img {
   max-width: 100%;
   display: block;

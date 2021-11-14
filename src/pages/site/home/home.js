@@ -3,6 +3,7 @@ import Search from '../../../components/site/search/search'
 import Hero from '../../../components/site/hero/hero'
 import Nav from '../../../components/site/nav/nav'
 import './home.css'
+import Footer from '../../../components/site/footer/footer'
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <Search />
       <Hero />
       <RecipeList />
+      <Footer />
     </main>
   )
 }

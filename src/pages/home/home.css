@@ -1,0 +1,30 @@
+.main{
+    background: url('../../assets/img/bg1.png');
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    background-position: center;
+}
+
+.hero{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+    height: calc(100vh - 4rem);
+    text-align: center;
+}
+.hero__title{
+    font-size: 2.2rem;
+}
+.hero__title span{
+    color: var(--main-clr);
+}
+
+.hero__img{
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .15);
+    border-radius: 10px;
+    transition: .2s;
+}
+.hero__img:hover{
+    transform: translateY(-5px);
+}

@@ -6,7 +6,7 @@
     justify-content: space-evenly;
     align-items: center;
     height: 100vh;
-    background-image: url('../../assets/img/pic3.png'), url('../../assets/img/Effect.png'), url('../../assets/img/Background.png');
+    background-image: url('../../assets/img/bg2.png'), url('../../assets/img/effect.png'), url('../../assets/img/bg1.png');
     background-repeat: no-repeat, no-repeat, no-repeat;
     background-size: contain, 30%, cover;
     background-position: center, 88% top, center;
@@ -58,6 +58,14 @@
     display: block;
 }
 
+.error{
+    background: #f17581;
+    color: #6a1a21;
+    margin: 1px;
+    padding: 4px;
+    border-radius: 6px;
+    display: block;
+}
 
 .btns{
     display: flex;

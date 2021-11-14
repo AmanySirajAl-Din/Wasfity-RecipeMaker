@@ -1,5 +1,5 @@
 import './signup.css';
-import food from '../../assets/img/signupfood.png';
+import food from '../../assets/img/signup-food.png';
 import { useState } from 'react';
 
 function Signup() {
@@ -95,6 +95,12 @@ function Signup() {
         })
     }
 
+    const [showPassword, setShowPassword]= useState(false);
+
+    const showHidePassword = ()=>{
+        setShowPassword(!showPassword);
+    }
+
     let url = '#';
 
   return (
@@ -112,14 +118,15 @@ function Signup() {
                     <label for="name" className="signupLabel">Your name <br />
                         <input 
                         type="text"
-                        className="name"
+                        className='name'
+                        // className={errors.userName ? 'border-red' : ''}
                         id="name"
                         placeholder="Ex: John Doe"
                         name="userName"
                         value={signup.userName}
                         onChange={(e) => nameValidation(e)}
                         />
-                        {errors.userName && (<small className="text-danger">{errors.userName}</small>)}
+                        {errors.userName && (<small className="error">{errors.userName}</small>)}
                     </label>
 
                     {/* Email */}
@@ -133,13 +140,13 @@ function Signup() {
                         value={signup.email}
                         onChange={(e) => emailValidation(e)}
                         />
-                        {errors.email && (<small className="text-danger">{errors.email}</small>)}
+                        {errors.email && (<small className="error">{errors.email}</small>)}
                     </label>
                     
                     {/* Password */}
                     <label for="password" className="passwordLabel">Password <br />
                         <input
-                        type="password"
+                        type={showPassword ? 'text' : 'password'}
                         className="password"
                         id="password"
                         placeholder="at least 8 characters"
@@ -147,7 +154,14 @@ function Signup() {
                         value={signup.password}
                         onChange={(e) => passwordValidation(e)}
                         />
-                        <small className="text-danger">{errors.password}</small>
+
+                        {!errors.password && // Not Gone appear when there is error
+                        <i 
+                            onClick={showHidePassword}
+                            className={showPassword ? 'bx bx-show show':'bx bx-hide hide'}
+                        ></i>}
+                        
+                        {errors.password && <small className="error">{errors.password}</small>}
                     </label>
 
                     {/* confirmPassword */}
@@ -160,7 +174,7 @@ function Signup() {
                         value={signup.confirmPass}
                         onChange={(e)=> confirmPassword(e)}
                         />
-                        <small className="text-danger">{errors.confirmPass}</small>
+                        {errors.confirmPass && <small className="text-danger">{errors.confirmPass}</small>}
                     </label>
 
                     <div className="btns">

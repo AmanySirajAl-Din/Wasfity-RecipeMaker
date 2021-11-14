@@ -5,7 +5,7 @@
     justify-content: space-evenly;
     align-items: center;
     height: 100vh;
-    background-image: url('../../assets/img/pic3.png'), url('../../assets/img/Effect.png'), url('../../assets/img/Background.png');
+    background-image: url('../../assets/img/bg2.png'), url('../../assets/img/effect.png'), url('../../assets/img/bg1.png');
     background-repeat: no-repeat, no-repeat, no-repeat;
     background-size: contain, 30%, cover;
     background-position: center, 84% top, center;
@@ -42,13 +42,25 @@
     gap: 1rem;
 }
 
-.signup__form label { color: #3E3E3E; font-size: .95rem; }
+.signup__form label {
+    color: #3E3E3E;
+    font-size: .8rem;
+}
 
 .signup__form input{
     padding: .6rem;
     border-radius: 10px;
     border: none;
     outline: none;
+}
+
+.error{
+    background: #f17581;
+    color: #6a1a21;
+    margin: 1px;
+    padding: 4px;
+    border-radius: 6px;
+    display: block;
 }
 
 .email,
@@ -59,10 +71,23 @@
     display: block;
 }
 
+.passwordLabel { position: relative; } /* To show hide password */
+
+.show,
+.hide{
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    font-size: 1.2rem;
+    color: #F8AB15;
+    cursor: pointer;
+}
+
 .btns{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: .4rem;
 }
 
 .agreelabel{
@@ -83,8 +108,8 @@
     width: 100%;
     padding: .7rem 0;
     border-radius: 10px;
-    font-size: 1.1rem;
-    margin: .5rem 0 .2rem;
+    font-size: 1rem;
+    margin: .4rem 0 .2rem;
     border: none;
     outline: none;
 }
@@ -99,3 +124,22 @@
 .login :first-child { color: #FFFFFF; }
 
 .login :last-child { color: #3E3E3E; }
+
+/* Media Queries */
+@media screen and (max-width: 950px) {
+
+    .myContainer{
+        background-image: url('../../assets/img/bg2.png'), url('../../assets/img/bg1.png');
+        background-repeat: no-repeat,no-repeat;
+        background-size: contain, cover;
+        background-position: center, center;
+    }
+
+    .main__img{
+        display: none;
+    }
+}
+
+/* .border-red{
+    border: 1px solid red !important;
+} */

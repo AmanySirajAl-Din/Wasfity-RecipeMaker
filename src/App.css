@@ -1,3 +1,12 @@
+/* Variables */
+:root{
+  --main-clr: #F8AB15;
+
+
+  /* Font */
+  --main-ff: 'Roboto', sans-serif;
+}
+
 *{
   box-sizing: border-box;
   margin: 0;
@@ -5,7 +14,7 @@
 }
 
 body{
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--main-ff);
 }
 
 a{

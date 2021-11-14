@@ -1,0 +1,84 @@
+.popular{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    padding: 6rem 0;
+}
+
+.popular__title{
+    text-align: center;
+    color: #222;
+    font-size: 2rem;
+}
+
+.popular__slider{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Recipe Card */
+.recipe{
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 5px;
+    gap: 1rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .2);
+    transition: .2s;
+    max-width: 235px;
+    padding: 0 0 2rem;
+}
+
+.slide__btns{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* width: fit-content; */
+    gap: 1.5rem;
+    margin: 2rem auto 0;
+}
+
+.btn{
+    border: 1px solid var(--main-clr);
+    outline: none;
+    padding: .8rem .5rem .8rem 1.6rem;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn i{
+    font-size: 1.2rem;
+}
+
+.video-btn{
+    background: var(--main-clr);
+    color: #f5f5f5;
+}
+.favorite-btn{
+    background: transparent;
+    color: var(--main-clr);
+}
+
+/* Arrows */
+.arrows{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.arrows i{
+    font-size: 3rem;
+    color: var(--main-clr);
+    margin: .4rem;
+    padding: 4px;
+    border-radius: 5px;
+    border: 1px solid var(--main-clr);
+}

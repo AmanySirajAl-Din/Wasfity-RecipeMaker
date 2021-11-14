@@ -1,0 +1,24 @@
+.search-bar{
+    display: grid;
+    place-items: center;
+}
+
+.search-label{
+    position: relative;
+    width: 50%;
+}
+.search-input{
+    border: 1px solid var(--main-clr);
+    padding: 1rem 1rem 1rem 3rem;
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
+}
+
+.search-icon{
+    color: #A0A0A0;
+    position: absolute;
+    left: 4%;
+    top: 30%;
+    font-size: 1.2rem;
+}

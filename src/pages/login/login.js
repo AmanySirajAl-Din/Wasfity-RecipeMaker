@@ -1,5 +1,5 @@
 import './login.css';
-import food from '../../assets/img/pic2.png';
+import food from '../../assets/img/login-food.png';
 import { useState } from 'react';
 
 function Login() {
@@ -78,7 +78,7 @@ function Login() {
                         value={login.email}
                         onChange={(e) => emailValidation(e)}
                         />
-                        {errors.email && (<small className="text-danger">{errors.email}</small>)}
+                        {errors.email && (<small className="error">{errors.email}</small>)}
                     </label>
 
                     {/* Password */}
@@ -92,7 +92,7 @@ function Login() {
                         value={login.password}
                         onChange={(e) => passwordValidation(e)}
                         />
-                        <small className="text-danger">{errors.password}</small>
+                        {errors.password && <small className="error">{errors.password}</small>}
                     </label>
 
                     <div className="btns">

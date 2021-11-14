@@ -1,0 +1,28 @@
+.header{
+    background: var(--main-clr);
+}
+
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+.logo{
+    width: clamp(50px, 6vw, 60px);
+}
+
+.userIcon{
+    color: #f5f5f5;
+    font-size: clamp(1rem, 4vw, 1.4rem);
+}
+
+/* Mobile */
+@media screen and (max-width: 1040px){
+    .nav{
+        margin-right: 1rem;
+        margin-left: 1rem;
+    }
+}

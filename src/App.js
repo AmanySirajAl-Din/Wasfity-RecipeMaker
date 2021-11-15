@@ -7,7 +7,8 @@ import Home from './pages/site/home/home'
 // import { collection, getDocs,onSnapshot } from'firebase/firestore'
 // import Navbar from './components/admin/Navbar/Navbar';
 // import Recipes from './pages/admin/recipes/Recipes';
-// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import RecipeDetails from './pages/site/recipeDetails/recipeDetails'
 // import Loader from './Loader';
 // import addRecipe from './pages/admin/recipes/AddRecipe';
 // import AddRecipeCat from './pages/admin/category_of_recipes/AddRecipeCat'
@@ -24,7 +25,6 @@ function App() {
     <div className="App">
       
     <Router>
->>>>>>> 60f30efb2856184607216efcdb06be5bd1265fcf
       <div>
       <div className="d-flex">
         <div > <Sidbar /></div>
@@ -61,13 +61,14 @@ function App() {
       </div>
       
       
-      <Footer/>
-    </Router> */}
+      <Footer/>*/}
 
-      {/* <Footer/>
-    </Router> */}
-
-      <Home />
+      <Router>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/:id' component={RecipeDetails} />
+        </Switch>
+      </Router>
     </div>
   )
 }

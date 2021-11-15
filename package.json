@@ -7,13 +7,10 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "bootstrap": "^5.1.3",
-    "firebase": "^9.2.0",
+    "firebase": "^9.4.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-<<<<<<< HEAD
-=======
     "react-redux": "^7.2.6",
->>>>>>> 34bb239624e4c5de09153e71c1b4b797d42fd252
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "redux": "^4.1.2",

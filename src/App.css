@@ -1,26 +1,17 @@
-/* Variables */
-:root{
-  --main-clr: #F8AB15;
-
-
-  /* Font */
-  --main-ff: 'Roboto', sans-serif;
-}
-
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-body{
-  font-family: var(--main-ff);
+body {
+  font-family: 'Roboto', sans-serif;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-.text-danger{
+.text-danger {
   color: red;
 }

@@ -45,6 +45,7 @@ function Signup() {
   }
 
   const nameValidation = (e) => {
+    // console.log(e.target.name, e.target.value);
     // data for authentication{
     let { name, value } = e.target
     setSignup({ ...signup, [name]: value })
@@ -69,7 +70,7 @@ function Signup() {
   }
 
   const eRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  const EmailValidation = (e) => {
+  const emailValidation = (e) => {
     // data for authentication{
     let { name, value } = e.target
     setSignup({ ...signup, [name]: value })
@@ -79,20 +80,20 @@ function Signup() {
         ...signup,
         email: e.target.value,
       })
-      setErrors({
-        ...errors,
-        email:
-          e.target.value.length === 0
-            ? 'field required'
-            : !eRegex.test(e.target.value)
-            ? 'weak email'
-            : null,
-      })
     }
+    setErrors({
+      ...errors,
+      email:
+        e.target.value.length === 0
+          ? 'field required'
+          : !eRegex.test(e.target.value)
+          ? 'Invalid email'
+          : null,
+    })
   }
 
   const pRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/
-  const PasswordValidation = (e) => {
+  const passwordValidation = (e) => {
     // data for authentication{
     let { name, value } = e.target
     setSignup({ ...signup, [name]: value })
@@ -114,7 +115,7 @@ function Signup() {
     })
   }
 
-  const ConfirmPassword = (e) => {
+  const confirmPassword = (e) => {
     if (e.target.name === 'confirmPass') {
       setSignup({
         ...signup,
@@ -132,15 +133,11 @@ function Signup() {
     })
   }
 
-  const [showPassword, setShowPassword] = useState(false)
-
-  const showHidePassword = () => {
-    setShowPassword(!showPassword)
-  }
+  let url = '#'
 
   return (
     <>
-      <main className='signup__container'>
+      <main className='myContainer'>
         <img className='main__img' src={food} alt='...' />
 
         <section className='signupBox'>
@@ -155,16 +152,16 @@ function Signup() {
               Your name <br />
               <input
                 type='text'
-                className={errors.displayName ? 'border-red name' : 'name'}
+                className='name'
                 id='name'
                 placeholder='Ex: John Doe'
-                name='userName'
+                name='displayName'
                 value={signup.displayName}
                 onChange={(e) => nameValidation(e)}
               />
-              {/* {errors.displayName && (
-                <small className='error'>{errors.displayName}</small>
-              )} */}
+              {errors.userName && (
+                <small className='text-danger'>{errors.userName}</small>
+              )}
             </label>
 
             {/* Email */}
@@ -172,35 +169,31 @@ function Signup() {
               Your email <br />
               <input
                 type='email'
-                className={errors.email ? 'border-red email' : 'email'}
+                className='email'
                 id='email'
                 placeholder='Example@example.com'
                 name='email'
                 value={signup.email}
-                onChange={(e) => EmailValidation(e)}
+                onChange={(e) => emailValidation(e)}
               />
-              {/* {errors.email && <small className='error'>{errors.email}</small>} */}
+              {errors.email && (
+                <small className='text-danger'>{errors.email}</small>
+              )}
             </label>
 
             {/* Password */}
             <label for='password' className='passwordLabel'>
               Password <br />
               <input
-                type={showPassword ? 'text' : 'password'}
-                className={errors.password ? 'border-red password' : 'password'}
+                type='password'
+                className='password'
                 id='password'
                 placeholder='at least 8 characters'
                 name='password'
                 value={signup.password}
-                onChange={(e) => PasswordValidation(e)}
+                onChange={(e) => passwordValidation(e)}
               />
-              <i
-                onClick={showHidePassword}
-                className={showPassword ? 'bx bx-show show' : 'bx bx-hide hide'}
-              ></i>
-              {/* {errors.password && (
-                <small className='error'>{errors.password}</small>
-              )} */}
+              <small className='text-danger'>{errors.password}</small>
             </label>
 
             {/* confirmPassword */}
@@ -208,19 +201,13 @@ function Signup() {
               Confirm Password <br />
               <input
                 type='password'
-                className={
-                  errors.confirmPass
-                    ? 'border-red confirmPassword'
-                    : 'confirmPassword'
-                }
+                className='confirmPassword'
                 id='confirmPassword'
                 name='confirmPass'
                 value={signup.confirmPass}
-                onChange={(e) => ConfirmPassword(e)}
+                onChange={(e) => confirmPassword(e)}
               />
-              {/* {errors.confirmPass && (
-                <small className='text-danger'>{errors.confirmPass}</small>
-              )} */}
+              <small className='text-danger'>{errors.confirmPass}</small>
             </label>
 
             <div className='btns'>
@@ -236,8 +223,8 @@ function Signup() {
           </form>
 
           <div className='login'>
-            <Link to='login'>have account?</Link>
-            <Link to='login'>Login</Link>
+            <a href={url}>have account?</a>
+            <Link to='/login'>Login</Link>
           </div>
         </section>
       </main>

@@ -42,3 +42,24 @@ function App() {
 }
 
 export default App
+//         dispatch(setUser(authUser));
+//       } else {
+//         dispatch(setUser(null));
+//       }
+//     });
+//   }, [dispatch]);
+//   return (
+//     <Router>
+//       <div className="App">
+//         <Switch>
+//           <UserRout exact path="/" component={Home} />
+//           //I custom this route in component UserRout in folder component
+//           <Route exact path="/login" component={Login} />
+//           <Route exact path="/register" component={Signup} />
+//         </Switch>
+//       </div>
+//     </Router>
+//   );
+// }
+
+// export default App;

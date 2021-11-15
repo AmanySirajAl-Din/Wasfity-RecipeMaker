@@ -52,6 +52,7 @@ function Login() {
     setlogin({ email: '', password: '' })
   }
 
+  //////////////////////////////// Email Validation //
   const eRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   const emailValidation = (e) => {
     // data for authentication{
@@ -75,6 +76,7 @@ function Login() {
     })
   }
 
+  ////////////////////////// Password Validation //
   const pRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/
   const passwordValidation = (e) => {
     // data for authentication{
@@ -102,29 +104,53 @@ function Login() {
 
   return (
     <>
-      <main className='container'>
+      <main className='login__container'>
         <img className='main__img' src={food} alt='...' />
 
         <section className='loginBox'>
           <h2 className='login__title'>Login</h2>
+          <p className='login__text'>
+            Log in with yout data that you entered during your registration
+          </p>
 
           {/* Email */}
           <form className='login__form' onSubmit={(e) => submitForm(e)}>
             {/* Social Login {*/}
+            <div className='social-login'>
+              <button
+                className='googleBtn button'
+                type='button'
+                onClick={(e) => GoogleSignin(e)}
+              >
+                <span>
+                  <i className='fab fa-google-plus-g'></i> Sign in with google+
+                </span>
+              </button>
+              <button
+                className='facebookBtn button'
+                type='button'
+                onClick={(e) => FBSignin(e)}
+              >
+                <span>
+                  <i className='fab fa-facebook-f'></i> Sign in with Facebook
+                </span>
+              </button>
+            </div>
+
             <label for='email' className='emailLabel'>
               Your email <br />
               <input
                 type='email'
-                className='email'
+                className={errors.email ? 'border-red email' : 'email'}
                 id='email'
                 placeholder='Example@example.com'
                 name='email'
                 value={login.email}
                 onChange={(e) => emailValidation(e)}
               />
-              {errors.email && (
+              {/* {errors.email && (
                 <small className='text-danger'>{errors.email}</small>
-              )}
+              )} */}
             </label>
 
             {/* Password */}
@@ -132,14 +158,14 @@ function Login() {
               Password <br />
               <input
                 type='password'
-                className='password'
+                className={errors.password ? 'border-red password' : 'password'}
                 id='password'
                 placeholder='at least 8 characters'
                 name='password'
                 value={login.password}
                 onChange={(e) => passwordValidation(e)}
               />
-              <small className='text-danger'>{errors.password}</small>
+              {/* <small className='text-danger'>{errors.password}</small> */}
             </label>
 
             <div className='btns'>
@@ -153,34 +179,11 @@ function Login() {
                 forgot Password?
               </a>
             </div>
-            <div className='social-login '>
-              <button
-                className='btn google-btn social-btn login__btn'
-                style={{ background: 'red', marginBottom: '1.5rem' }}
-                type='button'
-                onClick={(e) => GoogleSignin(e)}
-              >
-                <span>
-                  <i className='fab fa-google-plus-g'> </i>
-                  Continue with google+
-                </span>
-              </button>
-              <button
-                className='btn facebook-btn social-btn login__btn'
-                type='button'
-                onClick={(e) => FBSignin(e)}
-              >
-                <span>
-                  <i className='fab fa-facebook-f '></i>
-                  Continue with Facebook
-                </span>
-              </button>
-            </div>
             <button className='login__btn'>Log in</button>
           </form>
 
           <div className='signup'>
-            <a href={url}>Don't have account?</a>
+            <Link to='/register'>Don't have account?</Link>
             <Link to='/register'>Sign Up</Link>
           </div>
         </section>

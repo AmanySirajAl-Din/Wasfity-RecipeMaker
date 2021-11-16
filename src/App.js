@@ -1,5 +1,7 @@
-import './App.css'
-import Home from './pages/site/home/home'
+import "./App.css";
+import Home from "./pages/site/home/home";
+import Nav from "./components/site/nav/Nav";
+import Footer from "./components/site/footer/Footer";
 // import Footer  from './components/admin/footer/Footer';
 // import Sidbar from './components/admin/sidbar/Sidbar'
 // import {useEffect} from 'react'
@@ -7,8 +9,8 @@ import Home from './pages/site/home/home'
 // import { collection, getDocs,onSnapshot } from'firebase/firestore'
 // import Navbar from './components/admin/Navbar/Navbar';
 // import Recipes from './pages/admin/recipes/Recipes';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import RecipeDetails from './pages/site/recipeDetails/recipeDetails'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import RecipeDetails from "./pages/site/recipeDetails/recipeDetails";
 // import Loader from './Loader';
 // import addRecipe from './pages/admin/recipes/AddRecipe';
 // import AddRecipeCat from './pages/admin/category_of_recipes/AddRecipeCat'
@@ -20,7 +22,7 @@ import RecipeDetails from './pages/site/recipeDetails/recipeDetails'
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       {/* <Router>
     <div className="App">
       
@@ -64,13 +66,15 @@ function App() {
       <Footer/>*/}
 
       <Router>
+        <Nav />
         <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/:id' component={RecipeDetails} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/:id" component={RecipeDetails} />
         </Switch>
+        <Footer />
       </Router>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

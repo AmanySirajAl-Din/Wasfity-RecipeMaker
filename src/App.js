@@ -19,11 +19,32 @@ import RecipeDetails from "./pages/site/recipeDetails/recipeDetails";
 // import AddIngredCat from './pages/admin/Categories_for_ingredients/AddIngredCat'
 // import Ingredients from './pages/admin/Ingredients/Ingredients'
 // import AddIngredients from './pages/admin/Ingredients/AddIngredients'
+import { useDispatch } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
+import { setUser } from "./redux/authAction";
+import UserRout from "./components/site/UserRout/UserRout";
+import Login from "./pages/site/login/login";
+import Signup from "./pages/site/signup/signup";
+import React, { useEffect } from "react";
+import { store } from "./redux/store";
 
 function App() {
+  const dispatch = useDispatch();
+  // I made to sure if their user set hem not rediracte to login page
+  useEffect(() => {
+    onAuthStateChanged(auth, (authUser) => {
+      if (authUser) {
+        dispatch(setUser(authUser));
+      } else {
+        dispatch(setUser(null));
+      }
+    });
+  }, [dispatch]);
   return (
-    <div className="App">
-      {/* <Router>
+    <Router>
+      <div className="App">
+        {/* <Router>
     <div className="App">
       
     <Router>
@@ -65,15 +86,16 @@ function App() {
       
       <Footer/>*/}
 
-      <Router>
         <Nav />
         <Switch>
-          <Route exact path="/" component={Home} />
+          <UserRout exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Signup} />
           <Route exact path="/:id" component={RecipeDetails} />
         </Switch>
         <Footer />
-      </Router>
-    </div>
+      </div>
+    </Router>
   );
 }
 

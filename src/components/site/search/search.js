@@ -8,14 +8,17 @@ import category6 from '../../../assets/img/category6.jfif'
 import category7 from '../../../assets/img/category7.jfif'
 import category8 from '../../../assets/img/category8.jfif'
 import category9 from '../../../assets/img/category9.jfif'
+import { useSelector } from 'react-redux'
 
-const Search = () => {
+const Search = ({ props }) => {
+  console.log(props)
+  const lang = useSelector((state) => state)
   return (
     <div className='search-container'>
       <section className='search'>
         <div className='search__bar'>
           <label className='search__label'>
-            <input className='search__input' placeholder='Find a Recipe' />
+            <input className='search__input' placeholder={props.recipe} />
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='16'
@@ -23,11 +26,12 @@ const Search = () => {
               fill='currentColor'
               className='bi bi-search search__icon'
               viewBox='0 0 16 16'
+              style={lang === 'en' ? { right: '3%' } : { left: '3%' }}
             >
               <path d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z' />
             </svg>
           </label>
-          <h4 className='search__title'>search by ingredient</h4>
+          <h4 className='search__title'>{props.ingredient}</h4>
         </div>
         <div className='categories'>
           <div className='categorie'>

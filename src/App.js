@@ -3,7 +3,8 @@ import Home from './pages/site/home/home'
 import Nav from './components/site/nav/nav'
 import Footer from './components/site/footer/footer'
 import Profile from './pages/site/profile/profile'
-// import Footer  from './components/admin/footer/Footer';
+import { useSelector } from 'react-redux'
+// import Footer  from './components/admin/footer/Footer'
 // import Sidbar from './components/admin/sidbar/Sidbar'
 // import {useEffect} from 'react'
 // import{db} from './firebase'
@@ -12,6 +13,8 @@ import Profile from './pages/site/profile/profile'
 // import Recipes from './pages/admin/recipes/Recipes';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import RecipeDetails from './pages/site/recipeDetails/recipeDetails'
+import { IntlProvider } from 'react-intl'
+import langs from './assets/translation/langs'
 // import Loader from './Loader';
 // import addRecipe from './pages/admin/recipes/AddRecipe';
 // import AddRecipeCat from './pages/admin/category_of_recipes/AddRecipeCat'
@@ -22,6 +25,8 @@ import RecipeDetails from './pages/site/recipeDetails/recipeDetails'
 // import AddIngredients from './pages/admin/Ingredients/AddIngredients'
 
 function App() {
+  const lang = useSelector((state) => state)
+  console.log(lang)
   return (
     <div className='App'>
       {/* <Router>
@@ -65,15 +70,22 @@ function App() {
       
       
       <Footer/>*/}
-      <Router>
-        <Nav />
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/profile' component={Profile} />
-          <Route exact path='/:id' component={RecipeDetails} />
-        </Switch>
-        <Footer />
-      </Router>
+      <IntlProvider locale={lang} messages={langs[lang]}>
+        <Router>
+          <div // Handle Language
+            className={lang === 'ar' ? 'rtl' : 'ltr'}
+            dir={lang === 'ar' ? 'rtl' : 'ltr'}
+          >
+            <Nav />
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/profile' component={Profile} />
+              <Route exact path='/:id' component={RecipeDetails} />
+            </Switch>
+            <Footer />
+          </div>
+        </Router>
+      </IntlProvider>
     </div>
   )
 }

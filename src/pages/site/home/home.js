@@ -1,16 +1,18 @@
-import Search from "../../../components/site/search/search";
-import Hero from "../../../components/site/hero/hero";
-import RecipeList from "../../../components/site/recipesList/recipesList";
-import "./home.css";
+import Search from '../../../components/site/search/search'
+import Hero from '../../../components/site/hero/hero'
+import RecipeList from '../../../components/site/recipesList/recipesList'
+import { injectIntl } from 'react-intl'
+import './home.css'
 
-const Home = () => {
+const Home = ({ intl: { messages } }) => {
+  console.log(messages, ' from home')
   return (
     <main>
-      <Search />
-      <Hero />
-      <RecipeList />
+      <Search props={messages.search} />
+      <Hero props={messages.hero} />
+      <RecipeList props={messages} />
     </main>
-  );
-};
+  )
+}
 
-export default Home;
+export default injectIntl(Home)

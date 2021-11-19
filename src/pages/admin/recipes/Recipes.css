@@ -7,7 +7,7 @@
 }
   .add-recipe{
     width: 800px;
-    background-color: #F8AB15;
+    background-color: #F2EEEE;
     margin: auto;
   } 
 
@@ -19,3 +19,28 @@
       color:#110d06;
      
   }
+
+  .AddButton {
+
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background-color:  #F2EEEE;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+
+}
+
+.Component {
+
+    color: rgb(12, 11, 11);
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background-color:  #F8AB15;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+
+}

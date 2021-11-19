@@ -95,7 +95,8 @@ export default function AddIngredients() {
 
               onChange={(e) =>{
                 setCategoryId(e.target.value)
-                console.log(e.target.value)
+                let value=e.target.value;
+                console.log(value)
       
         //  let value = Array.from(e.target.selectedOptions, option => option.value);
         //  console.log(value);

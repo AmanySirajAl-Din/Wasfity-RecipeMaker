@@ -1,22 +1,43 @@
 import React from "react";
-import { db } from "../../../firebase";
+import { db, app } from "../../../firebase";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
-import './Categories_for_ingredients.css'
-import {useHistory} from "react-router-dom";
+import "./Categories_for_ingredients.css";
+import { useHistory } from "react-router-dom";
+import { getStorage, ref as storageRef,uploadBytes } from "firebase/storage";
 
 export default function AddIngredCat() {
+  
   const [ingerdCatName, setIngredCatName] = useState("");
-  const history=useHistory();
+  const [image, setImage] = useState(null);
+  const history = useHistory();
+
+  function handelChange(e) {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+
+      console.log("ss");
+    }
+  }
+  function handelUpload() {
+  const storage = getStorage(app);
+  const imagesRef = storageRef(storage, `images/${image.name}`);
+  uploadBytes(imagesRef,image).then((snapshot) => {
+    console.log(image)
+     console.log('Uploaded a blob or file!'); });
+
+  }
 
   const AddIngredCatHandel = (e) => {
     e.preventDefault();
+
     addDoc(collection(db, "Categories_for_ingredients"), {
-        ingCatName: ingerdCatName,
+      ingCatName: ingerdCatName,
     })
       .then(() => {
         alert("Recipe Added successefuly 👍");
-        return  history.push("/IC")
+        return history.push("/IC");
       })
       .catch((error) => {
         alert(error.message);
@@ -55,11 +76,23 @@ export default function AddIngredCat() {
               placeholder=" اسم القسم  "
             />
           </div>
+          <label className="text-primary font-weight-bold mb-2">
+            Service Image{" "}
+          </label>
+          <input
+            type="file"
+            accept=".png, .jpg, .jpeg"
+            required
+            onChange={handelChange}
+          />
+          <button onClick={handelUpload} className="btn-upload-gradiant">
+            Upload
+          </button>
           <div>
             {/* <Link to="RC"> */}
-              <button type="button " className="btn btn-dark  my-4">
-                اضف
-              </button>
+            <button type="button " className="btn btn-dark  my-4">
+              اضف
+            </button>
             {/* </Link> */}
           </div>
         </div>

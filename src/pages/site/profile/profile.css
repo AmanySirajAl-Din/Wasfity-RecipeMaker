@@ -3,7 +3,7 @@
 }
 .profile__tabs {
   max-width: 80%;
-  margin: 4rem auto 0;
+  margin: 6rem auto 3rem;
   border-radius: 20px;
   padding: 2rem;
   display: flex;

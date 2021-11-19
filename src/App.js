@@ -1,5 +1,7 @@
 import './App.css'
 import Home from './pages/site/home/home'
+import Nav from './components/site/nav/nav'
+import Footer from './components/site/footer/footer'
 import Profile from './pages/site/profile/profile'
 // import Footer  from './components/admin/footer/Footer';
 // import Sidbar from './components/admin/sidbar/Sidbar'
@@ -64,12 +66,13 @@ function App() {
       
       <Footer/>*/}
       <Router>
+        <Nav />
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route exact path='/profile' component={Profile} /> {/* User Id */}
+          <Route exact path='/profile' component={Profile} />
           <Route exact path='/:id' component={RecipeDetails} />
-          {/* Recipe Id */}
         </Switch>
+        <Footer />
       </Router>
     </div>
   )

@@ -1,0 +1,21 @@
+.profile {
+  width: 100%;
+}
+.profile__tabs {
+  max-width: 80%;
+  margin: 6rem auto 3rem;
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5e5e5;
+}
+
+.react-tabs__tab--selected {
+  background: #f8ab15 !important;
+  border-color: transparent !important;
+  color: black;
+  border-radius: 5px 5px 0 0;
+}

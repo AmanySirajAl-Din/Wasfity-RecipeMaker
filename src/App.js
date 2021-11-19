@@ -1,16 +1,20 @@
-import "./App.css";
-import Home from "./pages/site/home/home";
-import Nav from "./components/site/nav/Nav";
-import Footer from "./components/site/footer/Footer";
-// import Footer  from './components/admin/footer/Footer';
+import './App.css'
+import Home from './pages/site/home/home'
+import Nav from './components/site/nav/nav'
+import Footer from './components/site/footer/footer'
+import Profile from './pages/site/profile/profile'
+import { useSelector } from 'react-redux'
+// import Footer  from './components/admin/footer/Footer'
 // import Sidbar from './components/admin/sidbar/Sidbar'
 // import {useEffect} from 'react'
 // import{db} from './firebase'
 // import { collection, getDocs,onSnapshot } from'firebase/firestore'
 // import Navbar from './components/admin/Navbar/Navbar';
 // import Recipes from './pages/admin/recipes/Recipes';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import RecipeDetails from "./pages/site/recipeDetails/recipeDetails";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import RecipeDetails from './pages/site/recipeDetails/recipeDetails'
+import { IntlProvider } from 'react-intl'
+import langs from './assets/translation/langs'
 // import Loader from './Loader';
 // import addRecipe from './pages/admin/recipes/AddRecipe';
 // import AddRecipeCat from './pages/admin/category_of_recipes/AddRecipeCat'
@@ -19,32 +23,22 @@ import RecipeDetails from "./pages/site/recipeDetails/recipeDetails";
 // import AddIngredCat from './pages/admin/Categories_for_ingredients/AddIngredCat'
 // import Ingredients from './pages/admin/Ingredients/Ingredients'
 // import AddIngredients from './pages/admin/Ingredients/AddIngredients'
-import { useDispatch } from "react-redux";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
-import { setUser } from "./redux/authAction";
-import UserRout from "./components/site/UserRout/UserRout";
-import Login from "./pages/site/login/login";
-import Signup from "./pages/site/signup/signup";
-import React, { useEffect } from "react";
-import { store } from "./redux/store";
+// import { useDispatch } from "react-redux";
+// import { onAuthStateChanged } from "firebase/auth";
+// import { auth } from "./firebase";
+// import { setUser } from "./redux/authAction";
+// import UserRout from "./components/site/UserRout/UserRout";
+// import Login from "./pages/site/login/login";
+// import Signup from "./pages/site/signup/signup";
+// import React, { useEffect } from "react";
+// import { store } from "./redux/store";
 
 function App() {
-  const dispatch = useDispatch();
-  // I made to sure if their user set hem not rediracte to login page
-  useEffect(() => {
-    onAuthStateChanged(auth, (authUser) => {
-      if (authUser) {
-        dispatch(setUser(authUser));
-      } else {
-        dispatch(setUser(null));
-      }
-    });
-  }, [dispatch]);
+  const lang = useSelector((state) => state)
+  console.log(lang)
   return (
-    <Router>
-      <div className="App">
-        {/* <Router>
+    <div className='App'>
+      {/* <Router>
     <div className="App">
       
     <Router>
@@ -85,18 +79,24 @@ function App() {
       
       
       <Footer/>*/}
-
-        <Nav />
-        <Switch>
-          <UserRout exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Signup} />
-          <Route exact path="/:id" component={RecipeDetails} />
-        </Switch>
-        <Footer />
-      </div>
-    </Router>
-  );
+      <IntlProvider locale={lang} messages={langs[lang]}>
+        <Router>
+          <div // Handle Language
+            className={lang === 'ar' ? 'rtl' : 'ltr'}
+            dir={lang === 'ar' ? 'rtl' : 'ltr'}
+          >
+            <Nav />
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/profile' component={Profile} />
+              <Route exact path='/:id' component={RecipeDetails} />
+            </Switch>
+            <Footer />
+          </div>
+        </Router>
+      </IntlProvider>
+    </div>
+  )
 }
 
-export default App;
+export default App

@@ -1,19 +1,16 @@
 import './recipeDetails.css'
 import { data } from '../../../data/data'
 import Nav from '../../../components/site/nav/nav'
+import Footer from '../../../components/site/footer/footer'
 
 function RecipeDetails(props) {
   // Get recipe id from route
   let recipeId = props.match.params.id
-  console.log(recipeId)
 
   // Find the recipe from data by id
   let recipeDetails = data.find(({ id }) => {
     return id === parseInt(recipeId)
   })
-
-  console.log(recipeDetails)
-  console.log(recipeDetails.image)
 
   return (
     <>
@@ -33,6 +30,7 @@ function RecipeDetails(props) {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   )
 }

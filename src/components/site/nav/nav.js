@@ -1,16 +1,15 @@
 import './nav.css'
 import logo from '../../../assets/img/logo.png'
+import { Link } from 'react-router-dom'
 
 const Nav = () => {
-  const url = '#'
-
   return (
     <header className='header'>
       <nav className='nav'>
         <div className='left-side'>
-          <a href={url}>
+          <Link to='/'>
             <img src={logo} alt='logo' className='logo' />
-          </a>
+          </Link>
           <h3 className='nav__heading'> Wasfity </h3>
         </div>
         <div className='right-side'>

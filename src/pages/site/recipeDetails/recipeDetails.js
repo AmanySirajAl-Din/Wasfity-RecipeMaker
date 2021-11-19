@@ -10,10 +10,7 @@ function RecipeDetails(props) {
   let recipeDetails = data.find(({ id }) => {
     return id === parseInt(recipeId)
   })
-
   console.log(recipeDetails)
-  console.log(recipeDetails.image)
-
   return (
     <>
       <main className='recipeInfo__container'>

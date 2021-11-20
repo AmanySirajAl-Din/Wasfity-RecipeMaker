@@ -102,16 +102,16 @@ const Footer = ({ intl: { messages } }) => {
           <h1>{other.social}</h1>
           <div className='social__icons'>
             <a href={url}>
-              <i class='bx bxl-facebook'></i>
+              <i className='bx bxl-facebook'></i>
             </a>
             <a href={url}>
-              <i class='bx bxl-twitter'></i>
+              <i className='bx bxl-twitter'></i>
             </a>
             <a href={url}>
-              <i class='bx bxl-instagram'></i>
+              <i className='bx bxl-instagram'></i>
             </a>
             <a href={url}>
-              <i class='bx bxl-youtube'></i>
+              <i className='bx bxl-youtube'></i>
             </a>
           </div>
         </div>
@@ -122,7 +122,7 @@ const Footer = ({ intl: { messages } }) => {
         </div>
       </div>
 
-      <p class='copyright'>{other.rights} &copy; 2020</p>
+      <p className='copyright'>{other.rights} &copy; 2020</p>
     </footer>
   )
 }

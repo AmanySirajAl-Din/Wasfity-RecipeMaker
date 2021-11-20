@@ -9,9 +9,12 @@ import category7 from '../../../assets/img/category7.jfif'
 import category8 from '../../../assets/img/category8.jfif'
 import category9 from '../../../assets/img/category9.jfif'
 import { useSelector } from 'react-redux'
+import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
+import 'swiper/modules/navigation/navigation.min.css'
+
+import 'swiper/swiper.min.css'
 
 const Search = ({ props }) => {
-  console.log(props)
   const lang = useSelector((state) => state)
   return (
     <div className='search-container'>
@@ -33,44 +36,50 @@ const Search = ({ props }) => {
           </label>
           <h4 className='search__title'>{props.ingredient}</h4>
         </div>
-        <div className='categories'>
-          <div className='categorie'>
-            <img src={category1} alt='...' />
+        <Swiper
+          spaceBetween={1}
+          slidesPerView={6}
+          onSwiper={(swiper) => console.log(swiper)}
+          className='categories'
+          // navigation
+        >
+          <SwiperSlide>
+            <img className='categorie__img' src={category1} alt='...' />
             <p>Desert</p>
-          </div>
-          <div className='categorie'>
-            <img src={category2} alt='...' />
-            <p>Desert</p>
-          </div>
-          <div className='categorie'>
-            <img src={category3} alt='...' />
-            <p>Desert</p>
-          </div>
-          <div className='categorie'>
-            <img src={category4} alt='...' />
-            <p>Desert</p>
-          </div>
-          <div className='categorie'>
-            <img src={category5} alt='...' />
-            <p>Desert</p>
-          </div>
-          <div className='categorie'>
-            <img src={category6} alt='...' />
-            <p>Desert</p>
-          </div>
-          <div className='categorie'>
-            <img src={category7} alt='...' />
-            <p>Desert</p>
-          </div>
-          <div className='categorie'>
-            <img src={category8} alt='...' />
-            <p>Desert</p>
-          </div>
-          <div className='categorie'>
-            <img src={category9} alt='...' />
-            <p>Desert</p>
-          </div>
-        </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className='categorie__img' src={category2} alt='...' />
+            <p>Candy</p>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className='categorie__img' src={category3} alt='...' />
+            <p>Sea Food</p>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className='categorie__img' src={category4} alt='...' />
+            <p>Asian Food</p>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className='categorie__img' src={category5} alt='...' />
+            <p>Chainaese Food</p>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className='categorie__img' src={category6} alt='...' />
+            <p>Italian Food</p>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className='categorie__img' src={category7} alt='...' />
+            <p>Asian Food</p>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className='categorie__img' src={category8} alt='...' />
+            <p>Mexicain Food</p>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className='categorie__img' src={category9} alt='...' />
+            <p>Japanase Food</p>
+          </SwiperSlide>
+        </Swiper>
       </section>
     </div>
   )

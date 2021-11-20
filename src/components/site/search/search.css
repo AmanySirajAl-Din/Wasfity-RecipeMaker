@@ -58,7 +58,7 @@
   align-items: center;
   gap: 0.5rem;
 }
-.categorie img {
+.categorie__img {
   border-radius: 50%;
   max-width: 100%;
   height: auto;

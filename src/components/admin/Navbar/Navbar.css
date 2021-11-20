@@ -1,0 +1,14 @@
+
+  .navbar-container{
+    width:1205px;
+    border: 2px solid #F8AB15 ;
+    
+    
+    background-color:#F2EEEE;
+    margin-bottom: 40px;
+
+  }
+  a{
+    color: #000 important!;
+    padding: 5px;
+  }

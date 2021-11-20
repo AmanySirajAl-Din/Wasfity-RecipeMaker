@@ -1,0 +1,22 @@
+.recipeInfo__container {
+  display: grid;
+  place-items: center;
+}
+
+.recipeInfo {
+  width: 80%;
+  display: flex;
+  margin: 1rem auto;
+  background-color: #e5e5e5;
+}
+.recipeInfo__img {
+  flex: 1;
+  max-width: 100%;
+}
+.recipeInfo__content {
+  flex: 1;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

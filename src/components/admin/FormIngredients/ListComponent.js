@@ -23,9 +23,10 @@ const ListComponent = (props) => {
     await onSnapshot(
       collection(db, "Categories_for_ingredients"),
       (snapshot) => {
-        setCatIngred(
-          snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-        );
+        setCatIngred([
+          {id:"0",ingCatName:"اخت التصتيف"},
+          ...snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        ]);
       }
     );
     console.log("Category_of_ingredients", Category_of_ingredients);
@@ -41,14 +42,13 @@ const ListComponent = (props) => {
       where("categoryId", "==", `${id}`)
     );
     const querySnapshot = await getDocs(q);
-    let list = [];
+    let list = [{id:"0",ingName:"اختر المكون"}];
 
     querySnapshot.forEach((Ingredient) => {
       let item = {
         ...Ingredient.data(),
         id: Ingredient.id,
       };
-      console.log(item);
       list.push(item)
     });
     console.log("list", list);
@@ -80,7 +80,7 @@ const ListComponent = (props) => {
           >
             {Category_of_ingredients.map((Category_of_ingredient) => {
               return (
-                <option value={Category_of_ingredient.id} selected>
+                <option value={Category_of_ingredient.id}>
                   {" "}
                   {Category_of_ingredient.ingCatName}{" "}
                 </option>

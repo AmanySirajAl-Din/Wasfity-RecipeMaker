@@ -5,7 +5,6 @@ import { injectIntl } from 'react-intl'
 import './home.css'
 
 const Home = ({ intl: { messages } }) => {
-  console.log(messages, ' from home')
   return (
     <main>
       <Search props={messages.search} />

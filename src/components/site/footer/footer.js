@@ -1,96 +1,105 @@
 import './footer.css'
 import logo from '../../../assets/img/logo.png'
+import { Link } from 'react-router-dom'
+import { injectIntl } from 'react-intl'
 
-const Footer = () => {
+const Footer = ({ intl: { messages } }) => {
   const url = '#'
+  const { company, about, contact, more, other, privacy } = messages.footer
+  console.log(messages.footer)
 
   return (
     <footer>
       <div className='up__section'>
-        <a href={url} className='f__logo'>
+        <Link to='/' className='f__logo'>
           <img src={logo} alt='logo' />
-        </a>
+        </Link>
         <ul>
-          <h1>Company</h1>
+          <h1>{company.company}</h1>
           <li>
-            <a href={url}>Teams</a>
+            <a href={url}>{company.teams}</a>
           </li>
           <li>
-            <a href={url}>Services</a>
+            <a href={url}>{company.services}</a>
           </li>
           <li>
-            <a href={url}>Contact Us</a>
+            <a href={url}>{company.subscribe}</a>
           </li>
           <li>
-            <a href={url}>Support</a>
+            <a href={url}>{company.advertise}</a>
           </li>
         </ul>
 
         <ul>
-          <h1>About</h1>
+          <h1>{about.about}</h1>
           <li>
-            <a href={url}>Team & company</a>
+            <a href={url}>{about.community}</a>
           </li>
           <li>
-            <a href={url}>Location</a>
+            <a href={url}>{about.location}</a>
           </li>
           <li>
-            <a href={url}>About</a>
+            <a href={url}>{about.app}</a>
           </li>
           <li>
-            <a href={url}>Our Services</a>
+            <a href={url}>{about.services}</a>
           </li>
         </ul>
 
         <ul>
-          <h1>Contact Us</h1>
+          <h1>{contact.contact}</h1>
           <li>
             <p>+92475357355</p>
           </li>
           <li>
-            <p>House #215,Street #5</p>
+            <p>
+              {contact.house} #215,{contact.street} #5
+            </p>
           </li>
           <li>
-            <p>Near Model Town</p>
+            <p>{contact.town}</p>
+          </li>
+          <li>
+            <p>{contact.map}</p>
           </li>
         </ul>
       </div>
 
       <div className='down__section'>
         <ul>
-          <h1>Company</h1>
+          <h1>{privacy.privacyPolicy}</h1>
           <li>
-            <a href={url}>Teams</a>
+            <a href={url}>{privacy.teamsOfService}</a>
           </li>
           <li>
-            <a href={url}>Services</a>
+            <a href={url}>{privacy.ad}</a>
           </li>
           <li>
-            <a href={url}>Contact Us</a>
+            <a href={url}>{privacy.accessibility}</a>
           </li>
           <li>
-            <a href={url}>Support</a>
+            <a href={url}>{privacy.help}</a>
           </li>
         </ul>
 
         <ul>
-          <h1>About</h1>
+          <h1>{more.learnMore}</h1>
           <li>
-            <a href={url}>Team & company</a>
+            <a href={url}>{more.service}</a>
           </li>
           <li>
-            <a href={url}>Location</a>
+            <a href={url}>{more.jobs}</a>
           </li>
           <li>
-            <a href={url}>About</a>
+            <a href={url}>{more.licencing}</a>
           </li>
           <li>
-            <a href={url}>Our Services</a>
+            <a href={url}>{more.feedback}</a>
           </li>
         </ul>
 
         <div className='social'>
-          <h1>Social</h1>
+          <h1>{other.social}</h1>
           <div className='social__icons'>
             <a href={url}>
               <i class='bx bxl-facebook'></i>
@@ -108,14 +117,14 @@ const Footer = () => {
         </div>
 
         <div className='footer__search'>
-          <h1>Email</h1>
-          <input type='email' placeholder='Enter Your Email' />
+          <h1>{other.email}</h1>
+          <input type='email' placeholder={other.enterEmail} />
         </div>
       </div>
 
-      <p class='copyright'>All Right Reserved &copy; 2020</p>
+      <p class='copyright'>{other.rights} &copy; 2020</p>
     </footer>
   )
 }
 
-export default Footer
+export default injectIntl(Footer)

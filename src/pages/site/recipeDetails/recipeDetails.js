@@ -4,13 +4,11 @@ import { data } from '../../../data/data'
 function RecipeDetails(props) {
   // Get recipe id from route
   let recipeId = props.match.params.id
-  console.log(recipeId)
 
   // Find the recipe from data by id
   let recipeDetails = data.find(({ id }) => {
     return id === parseInt(recipeId)
   })
-  console.log(recipeDetails)
   return (
     <>
       <main className='recipeInfo__container'>
@@ -22,9 +20,7 @@ function RecipeDetails(props) {
           />
           <div className='recipeInfo__content'>
             <h2 className='recipeInfo__title'>{recipeDetails.title}</h2>
-            <p className='recipeInfo__description'>
-              {recipeDetails.description}
-            </p>
+            <p className='recipeInfo__data'>{recipeDetails.description}</p>
           </div>
         </section>
       </main>

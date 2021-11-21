@@ -29,4 +29,5 @@ img {
   max-width: 100%;
   display: block;
   height: auto;
+  transition: 0.3s;
 }

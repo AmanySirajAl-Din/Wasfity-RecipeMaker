@@ -15,7 +15,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import RecipeDetails from './pages/site/recipeDetails/recipeDetails'
 import { IntlProvider } from 'react-intl'
 import langs from './assets/translation/langs'
-import Slider from './components/site/slider/slider'
 // import Loader from './Loader';
 // import addRecipe from './pages/admin/recipes/AddRecipe';
 // import AddRecipeCat from './pages/admin/category_of_recipes/AddRecipeCat'
@@ -90,7 +89,6 @@ function App() {
             <Switch>
               <Route exact path='/' component={Home} />
               <Route exact path='/profile' component={Profile} />
-              <Route exact path='/slider' component={Slider} />
               <Route exact path='/:id' component={RecipeDetails} />
             </Switch>
             <Footer />

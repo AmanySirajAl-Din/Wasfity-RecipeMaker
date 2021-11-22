@@ -12,37 +12,50 @@ import { db } from '../../../firebase'
 
 const ListComponent = (props) => {
   const [Ingredients, setIngredients] = useState([])
+  const [currentIngredient, setCurrentIngredient] = useState({})
   const [currentCat, setCurrentCat] = useState({})
   const [personNum, setPersonNum] = useState([])
   const [Category_of_ingredients, setCatIngred] = useState([])
   const [unit, setUnit] = useState('')
   const [quant, setQuant] = useState('')
 
-  useEffect(() => {
-    onSnapshot(collection(db, 'Categories_for_ingredients'), (snapshot) =>
-      setCatIngred(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+  useEffect(async () => {
+    await onSnapshot(
+      collection(db, 'Categories_for_ingredients'),
+      (snapshot) => {
+        setCatIngred([
+          { id: '0', ingCatName: 'اخت التصتيف' },
+          ...snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
+        ])
+      }
     )
-  }, [])
-  // console.log(Category_of_ingredients)
-
-  useEffect(() => {
+    console.log('Category_of_ingredients', Category_of_ingredients)
     setCurrentCat(Category_of_ingredients[0])
-    // console.log(currentCat)
-  }, [Category_of_ingredients])
+    console.log('Current Category', currentCat)
+    await TestQuery(currentCat.id)
+  }, [])
 
-  async function TestQuery(id) {
+  const TestQuery = async (id) => {
+    console.log('call test query', id)
     const q = query(
       collection(db, 'Ingredients'),
       where('categoryId', '==', `${id}`)
-    ) //!=
-
+    )
     const querySnapshot = await getDocs(q)
-    // console.log(querySnapshot)
-    querySnapshot.forEach((Ingredients) => {
-      console.log(Ingredients.data().ingName, typeof Ingredients.data())
+    let list = [{ id: '0', ingName: 'اختر المكون' }]
+
+    querySnapshot.forEach((Ingredient) => {
+      let item = {
+        ...Ingredient.data(),
+        id: Ingredient.id,
+      }
+      list.push(item)
     })
+    console.log('list', list)
+    setIngredients(list)
+    console.log('set Ingredients', Ingredients)
   }
-  let value
+
   return (
     <div className='Component'>
       <h1>{props.text}</h1>
@@ -55,22 +68,21 @@ const ListComponent = (props) => {
           <select
             className='form-select form-control'
             id='Category_of_ingredients'
-            // value={Category_of_ingredients}
-
+            value={currentCat}
             onChange={(e) => {
-              value = e.target.value
-              // setCatIngred(e.target.value)
-              // console.log(e.target.value)
-              TestQuery(value).then((data) => data)
+              setCurrentCat(e.target.value)
+              TestQuery(e.target.value)
+              console.log('on change', e.target.value)
               //  let value = Array.from(e.target.selectedOptions, option => option.value);
               //  console.log(value);
               // setCategoryId(value);
             }}
           >
-            {Category_of_ingredients.map((Category_of_ingredient, index) => {
+            {Category_of_ingredients.map((Category_of_ingredient) => {
               return (
-                <option value={Category_of_ingredient.id} key={index}>
-                  {Category_of_ingredient.ingCatName}
+                <option value={Category_of_ingredient.id}>
+                  {' '}
+                  {Category_of_ingredient.ingCatName}{' '}
                 </option>
               )
             })}
@@ -83,15 +95,17 @@ const ListComponent = (props) => {
           <select
             className='form-select form-control'
             id='recipeIngredient'
-            value={Ingredients}
-            onChange={(e) => setIngredients(e.target.value)}
+            value={currentIngredient}
+            onChange={(e) => {
+              setCurrentIngredient(e.target.value)
+              console.log(e.target.value)
+            }}
           >
-            {Ingredients.map((Ingredient, index) => {
-              return (
-                <option key={index} value={Ingredient.id}>
-                  {Ingredient.ingName}
-                </option>
-              )
+            {Ingredients.map((Ingredient) => {
+              if (Ingredient)
+                return (
+                  <option value={Ingredient.id}> {Ingredient.ingName} </option>
+                )
             })}
           </select>
         </div>

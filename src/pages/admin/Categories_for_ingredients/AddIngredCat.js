@@ -62,7 +62,6 @@ export default function AddIngredCat() {
 
           <div className='form-group text-right'>
             <label htmlFor='recipeName' className='form-label '>
-              {' '}
               اسم القسم
             </label>
             <input

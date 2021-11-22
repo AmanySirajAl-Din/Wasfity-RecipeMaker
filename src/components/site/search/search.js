@@ -10,16 +10,15 @@ import category8 from '../../../assets/img/category8.jfif'
 import category9 from '../../../assets/img/category9.jfif'
 import { useSelector } from 'react-redux'
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
-import SwiperCore, { Navigation } from 'swiper'
+import SwiperCore, { Navigation, Autoplay } from 'swiper'
 import 'swiper/modules/navigation/navigation.min.css'
 
 import 'swiper/swiper.min.css'
 import 'swiper/swiper-bundle.css'
 
-SwiperCore.use(Navigation)
-
 const Search = ({ props }) => {
   const lang = useSelector((state) => state)
+  SwiperCore.use([Navigation, Autoplay])
   return (
     <div className='search-container'>
       <section className='search'>
@@ -40,13 +39,21 @@ const Search = ({ props }) => {
           </label>
           <h4 className='search__title'>{props.ingredient}</h4>
         </div>
+
         <Swiper
           spaceBetween={1}
-          slidesPerView={6}
+          slidesPerView={3}
           onSwiper={(swiper) => console.log(swiper)}
           className='categories'
           navigation
+          autoplay={{ delay: 3000 }}
           style={{ direction: 'rtl' }}
+          breakpoints={{
+            // when window width is >= 750px
+            750: {
+              slidesPerView: 6,
+            },
+          }}
         >
           <SwiperSlide>
             <img className='categorie__img' src={category1} alt='...' />

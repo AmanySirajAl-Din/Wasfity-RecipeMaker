@@ -57,6 +57,7 @@ const ListComponent = (props) => {
   };
 
   return (
+    
     <div className="Component">
       <h1>{props.text}</h1>
       <h3 className=" text-dark text-right my-4">المقادير</h3>

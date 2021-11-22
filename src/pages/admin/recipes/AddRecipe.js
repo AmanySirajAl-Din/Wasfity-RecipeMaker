@@ -1,5 +1,6 @@
 import React from "react";
 import "./Recipes.css";
+import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   collection,
@@ -9,41 +10,66 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
-import { Buttonn } from "../../../components/admin/FormIngredients/Buttonn";
-import { ListComponent } from "../../../components/admin/FormIngredients/ListComponent";
-import { db } from "../../../firebase";
 
-export default function AddRecipe() {
-  // const [Ingredients, setIngredients] = useState("");
+import { db } from "../../../firebase";
+import { list } from "@firebase/storage";
+
+export default function AddRecipe(props) {
   const [recipeId, setRecipeId] = useState("");
   const [Category_of_recipes, setRecipeCat] = useState([]);
   const [recipeName, setRecipeName] = useState("");
   const [recipePreper, setRecipePreper] = useState("");
-  // const [recipeCat, setRecipeCatName] = useState("");
   const [DegreeOfDifficulty, setDegreeOfDifficulty] = useState("");
-  // const [categoryIngredId, setCategoryId] = useState("");
   const [categoryRecipeId, setCategoryRecipeId] = useState("");
-  // const [Category_of_ingredients, setCatIngred] = useState([]);
+  let [index, setIndex] = useState(0);
+  const [Ingredients, setIngredients] = useState([]);
+  const [currentIngredient, setCurrentIngredient] = useState({});
+  const [currentCat, setCurrentCat] = useState({});
+  const [personNum, setPersonNum] = useState([]);
+  const [Category_of_ingredients, setCatIngred] = useState([]);
+  const [unit, setUnit] = useState("");
+  const [quant, setQuant] = useState("");
+  const [ingredientList, setIngredientList] = useState([]);
   const [components, setComponents] = useState(["First Ingredient"]);
-  const [componentNames, setComponentNames] = useState([
-    "second gredient",
-    "Third Ingredient",
-    "Fourth Ingredient",
-    "Saturn",
-    "Uranus",
-    "Neptune",
-  ]);
+  const history = useHistory();
 
-  function addComponent(e) {
-    e.preventDefault();
 
-    if (componentNames.length > 0) {
-      setComponents([...components, componentNames[0]]);
-      componentNames.splice(0, 1);
-    } else {
-      window.alert("not allowed to add more ingredient");
-    }
-  }
+  useEffect(async () => {
+    await onSnapshot(
+      collection(db, "Categories_for_ingredients"),
+      (snapshot) => {
+        setCatIngred([
+          { id: "0", ingCatName: "اخت التصتيف" },
+          ...snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
+        ]);
+      }
+    );
+    console.log("Category_of_ingredients", Category_of_ingredients);
+    setCurrentCat(Category_of_ingredients[0]);
+    console.log("Current Category", currentCat);
+    await TestQuery(currentCat.id);
+  }, []);
+
+  const TestQuery = async (id) => {
+    console.log("call test query", id);
+    const q = query(
+      collection(db, "Ingredients"),
+      where("categoryId", "==", `${id}`)
+    );
+    const querySnapshot = await getDocs(q);
+    let list = [{ id: "0", ingName: "اختر المكون" }];
+
+    querySnapshot.forEach((Ingredient) => {
+      let item = {
+        ...Ingredient.data(),
+        id: Ingredient.id,
+      };
+      list.push(item);
+    });
+    console.log("list", list);
+    setIngredients(list);
+    console.log("set Ingredients", Ingredients);
+  };
 
   useEffect(
     () =>
@@ -55,46 +81,64 @@ export default function AddRecipe() {
     []
   );
 
+  function addIngerdRecipe(e) {
+    e.preventDefault();
+    setIndex(++index);
+    // console.log(index);
+    setIngredientList([
+      ...ingredientList,
+      {
+        currentCat: currentCat,
+        currentIngredient: currentIngredient,
+        personNum: personNum,
+        quant: quant,
+        unit: unit,
+        index: index,
+      },
+    ]);
+     console.log(ingredientList);
+  }
   const AddRecipeHandel = (e) => {
+    console.log("gggggggggg");
     e.preventDefault();
 
-    //ADD data in recipes collection
-    db.collection("recipes")
-      .add({
-        recipeName: recipeName,
-        categoryRecipeId: categoryRecipeId,
-        recipePreper: recipePreper,
-        DegreeOfDifficulty: DegreeOfDifficulty,
-      })
+    addDoc(collection(db, "recipes"), {
+      recipeName: recipeName,
+      categoryRecipeId: categoryRecipeId,
+      recipePreper: recipePreper,
+      DegreeOfDifficulty: DegreeOfDifficulty,
+    })
       .then((data) => {
-        setRecipeId(data.id);
-        alert("Recipe Added successefuly thum");
+        console.log(data.id);
 
-        console.log("done");
-        // Add data in Ingredients_of_recipe collection
+        addDoc(collection(db, "Ingredients_of_recipe"), {
+          ingredientList:ingredientList,
+          recipeId:data.id
+        })
+          .then(() => {
+            alert("Recipe Added successefuly 👍");
+            return history.push("/RC");
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
+        alert("Recipe Added successefuly 👍");
+        return history.push("/RC");
       })
       .catch((error) => {
         alert(error.message);
       });
-    db.collection("Ingredients_of_recipe")
-      .add({
-        recipeId: recipeId,
-      })
-      .then(() => {
-        alert("Recipe Added successefuly thum");
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
 
-    // setRecipeName("")
-    // setRecipePreper("")
-    // setRecipeIngredients("")
+    // setRecipeCatName("")
   };
+
+ 
+
+  
   return (
     <div className=" add-recipe ">
       <form className="form" onSubmit={AddRecipeHandel}>
-        <div className="mt-4 p-5" dir="rtl">
+        <div className="mt-0 p-5" dir="rtl">
           <h1 className="text-center text-black">اضافة طبخة</h1>
           <div className="form-group text-right">
             <label for="studentId" className="form-label">
@@ -151,40 +195,181 @@ export default function AddRecipe() {
             </select>
           </div>
           <div>
-            <Buttonn
-              onClick={addComponent}
-              text={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="40"
-                  height="40"
-                  fill="#F8AB15"
-                  class="bi bi-patch-plus-fill"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0z" />
-                </svg>
-              }
-            />
-
-            {components.map((item, i) => (
-              <ListComponent text={item} />
-            ))}
+            <div className="d-flex mt-4">
+              <div className="Component">
+                <h1>{props.text}</h1>
+                <h3 className=" text-dark text-right my-4 ">المقادير</h3>
+                <div className="form-group text-right ingrediant-recipe">
+                  <div className="form-group text-right ingrediant-recipe">
+                    <label for="FacultyAdress" className="form-label">
+                      التصنيف{" "}
+                    </label>
+                    <select
+                      className="form-select form-control"
+                      id="Category_of_ingredients"
+                      value={currentCat}
+                      onChange={(e) => {
+                        setCurrentCat(e.target.value);
+                        TestQuery(e.target.value);
+                        console.log("on change", e.target.value);
+                        //  let value = Array.from(e.target.selectedOptions, option => option.value);
+                        //  console.log(value);
+                        // setCategoryId(value);
+                      }}
+                    >
+                      {Category_of_ingredients.map((Category_of_ingredient) => {
+                        return (
+                          <option value={Category_of_ingredient.id}>
+                            {" "}
+                            {Category_of_ingredient.ingCatName}{" "}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                  <div className="form-group text-right">
+                    <label for="FacultyAdress" className="form-label">
+                      المكونات{" "}
+                    </label>
+                    <select
+                      className="form-select form-control"
+                      id="recipeIngredient"
+                      value={currentIngredient}
+                      onChange={(e) => {
+                        setCurrentIngredient(e.target.value);
+                        console.log(e.target.value);
+                      }}
+                    >
+                      {Ingredients.map((Ingredient) => {
+                        if (Ingredient)
+                          return (
+                            <option value={Ingredient.id}>
+                              {" "}
+                              {Ingredient.ingName}{" "}
+                            </option>
+                          );
+                      })}
+                    </select>
+                  </div>
+                  <div className="form-group text-right">
+                    <input
+                      type="number"
+                      className="form-control mt-2"
+                      id="quant"
+                      value={quant}
+                      onChange={(e) => {
+                        setQuant(e.target.value);
+                        console.log(e.target.value);
+                      }}
+                      placeholder=" الكمية"
+                    />
+                    <input
+                      type="number"
+                      className="form-control mt-2"
+                      id="personNum"
+                      placeholder=" تكفي كام شخص"
+                      value={personNum}
+                      onChange={(e) => {
+                        setPersonNum(e.target.value);
+                        console.log(e.target.value);
+                      }}
+                    />
+                    <select
+                      className="form-select form-select-sm mt-2"
+                      aria-label=".form-select-sm example"
+                      value={unit}
+                      onChange={(e) => {
+                        setUnit(e.target.value);
+                        console.log(e.target.value);
+                      }}
+                    >
+                      <option selected>اختر الوحدة</option>
+                      <option value="جرام">جرام</option>
+                      <option value="كيلو">كيلو</option>
+                      <option value="لتر">لتر</option>
+                      <option value="كوب كبير"> كوب كبير</option>
+                      <option value="كوب صغير">كوب صغير</option>
+                      <option value="معلقة كبيرة">معلقة كبيرة</option>
+                      <option value="معلقة صغيرة">معلقة صغيرة</option>
+                    </select>
+                    <button className="add-btn" onClick={addIngerdRecipe}>
+                      {" "}
+                      إضافة مكون
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="ingred-table">
+                <table class="table ">
+                  <thead>
+                    <tr>
+                      <th scope="col">Index</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Quantity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {ingredientList.map((ingredlist) => {
+                      return (
+                        <tr>
+                          <th>{ingredlist.index}</th>
+                          <td>{ingredlist.quant}</td>
+                          <td>{ingredlist.unit}</td>
+                          <td>Thornton</td>
+                          <td>@fat</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
         <div className=" mt-4 p-5" dir="rtl">
-          <div className="form-group text-right">
-            <label for="fname" className="form-label">
-              طريقة التحضير{" "}
-            </label>
-            <textarea
-              className="form-control"
-              id="recipePreper"
-              value={recipePreper}
-              onChange={(e) => setRecipePreper(e.target.value)}
-              placeholder="طريقة التحضير"
-            />
+          <div className="d-flex mt-4">
+            <div className="Component">
+              <div className="form-group text-right">
+                <label for="fname" className="form-label">
+                  طريقة التحضير{" "}
+                </label>
+                <textarea
+                  className="form-control"
+                  id="recipePreper"
+                  value={recipePreper}
+                  onChange={(e) => setRecipePreper(e.target.value)}
+                  placeholder="طريقة التحضير"
+                />
+              </div>
+
+              <button className="add-btn" onClick={addIngerdRecipe}>
+                {" "}
+                إضافة مكون
+              </button>
+            </div>
+            <div className="ingred-table">
+              <table class="table ">
+                <thead>
+                  <tr>
+                    <th scope="col">Index</th>
+                    <th scope="col">طريقة التحضير</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ingredientList.map((ingredlist) => {
+                    return (
+                      <tr>
+                        <th>{ingredlist.index}</th>
+                        <td>{ingredlist.quant}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
+
           <div className="form-group text-right">
             <label for="FacultyAdress" className="form-label">
               درجة الصعوبة{" "}
@@ -218,7 +403,7 @@ export default function AddRecipe() {
             />
           </div>
           <br />
-          <button type="button" className="btn btn-success">
+          <button type="submit" className="btn btn-success">
             اضف
           </button>
         </div>

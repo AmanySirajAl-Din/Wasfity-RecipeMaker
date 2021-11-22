@@ -5,45 +5,99 @@ import { Link } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import "./Categories_for_ingredients.css";
 import { useHistory } from "react-router-dom";
-import { getStorage, ref as storageRef,uploadBytes } from "firebase/storage";
+import { getStorage, ref as storageRef,getDownloadURL ,uploadBytesResumable} from "firebase/storage";
 
 export default function AddIngredCat() {
   
   const [ingerdCatName, setIngredCatName] = useState("");
   const [image, setImage] = useState(null);
   const history = useHistory();
+   
+   const [progress, setProgress] = useState(0);
+    const [url, setUrl] = useState('');
+    const [loading, setLoading] = useState(true);
 
   function handelChange(e) {
-    if (e.target.files[0]) {
-      setImage(e.target.files[0]);
+    if (e.target.files[0],'name',{
+      writable:true,
+      value:new Date()
+    }) 
+      setImage(e.target.files[0])
 
-      console.log("ss");
-    }
+
   }
-  function handelUpload() {
-  const storage = getStorage(app);
-  const imagesRef = storageRef(storage, `images/${image.name}`);
-  uploadBytes(imagesRef,image).then((snapshot) => {
-    console.log(image)
-     console.log('Uploaded a blob or file!'); });
+    
+  
+  async function handelUpload() {
 
+  const storage = getStorage(app);
+  const storageReff=storageRef(storage)
+  const imagesRef = storageRef(storageReff, `images/${image.name}`);
+  const uploadTask=uploadBytesResumable(imagesRef,image);
+
+  console.log(uploadTask);
+  uploadTask.on(
+    "state_changed",(snapshot)=>{
+      const prog =Math.round(
+        (snapshot.bytesTransferred/snapshot.totalBytes)*100
+
+      );
+      setProgress(prog);
+    },
+    (error)=> console.log(error),
+    ()=>{
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
+
+        console.log("file available at ",downloadURL);
+        setUrl(downloadURL)
+      });
+     
+    }
+  )
+  
+  
+  console.log(url);
   }
 
   const AddIngredCatHandel = (e) => {
     e.preventDefault();
+    
 
     addDoc(collection(db, "Categories_for_ingredients"), {
       ingCatName: ingerdCatName,
+      imagePath:url
     })
       .then(() => {
+        // setError("");
+        setLoading(true)
         alert("Recipe Added successefuly 👍");
         return history.push("/IC");
       })
       .catch((error) => {
         alert(error.message);
+        setLoading(false)
+        
+      });
+
+        addDoc(collection(db, "Categories_for_ingredients"), {
+      ingCatName: ingerdCatName,
+      imagePath:url
+    })
+      .then(() => {
+        // setError("");
+        setLoading(true)
+        alert("Recipe Added successefuly 👍");
+        return history.push("/IC");
+      })
+      .catch((error) => {
+        alert(error.message);
+        setLoading(false)
+        
       });
     // setRecipeCatName("")
   };
+  
+  
   return (
     <div className=" add-category">
       <form className="form" onSubmit={AddIngredCatHandel}>
@@ -85,6 +139,8 @@ export default function AddIngredCat() {
             required
             onChange={handelChange}
           />
+          {loading && <label>loading</label>}
+
           <button onClick={handelUpload} className="btn-upload-gradiant">
             Upload
           </button>
@@ -99,4 +155,5 @@ export default function AddIngredCat() {
       </form>
     </div>
   );
-}
+};
+

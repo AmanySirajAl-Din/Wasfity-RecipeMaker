@@ -9,6 +9,17 @@ const ar = {
     search: {
       recipe: 'ابحث عن وصفة',
       ingredient: 'ابحث عن طريق المكون',
+      categories: {
+        desert: 'تحلية',
+        candy: 'جلوي',
+        seaFood: 'طعام بحري',
+        grills: 'مشويات',
+        apetizer: 'مقبلات',
+        pastries: 'مكرونات',
+        breakfast: 'إفطار',
+        launch: 'غداء',
+        dinner: 'عشاء',
+      },
     },
     hero: {
       popular: 'أشهر الوصفات',

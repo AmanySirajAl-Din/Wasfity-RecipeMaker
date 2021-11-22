@@ -9,6 +9,17 @@ const en = {
     search: {
       recipe: 'Find a Recipe',
       ingredient: 'search by ingredient',
+      categories: {
+        desert: 'Desert',
+        candy: 'Candy',
+        seaFood: 'Sea Food',
+        grills: 'Grills',
+        apetizer: 'Apetizer',
+        pastries: 'Pastries',
+        breakfast: 'Breakfast',
+        launch: 'Launch',
+        dinner: 'Dinner',
+      },
     },
     hero: {
       popular: 'Most Popular',

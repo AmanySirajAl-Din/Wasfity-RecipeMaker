@@ -10,9 +10,13 @@ import category8 from '../../../assets/img/category8.jfif'
 import category9 from '../../../assets/img/category9.jfif'
 import { useSelector } from 'react-redux'
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
+import SwiperCore, { Navigation } from 'swiper'
 import 'swiper/modules/navigation/navigation.min.css'
 
 import 'swiper/swiper.min.css'
+import 'swiper/swiper-bundle.css'
+
+SwiperCore.use(Navigation)
 
 const Search = ({ props }) => {
   const lang = useSelector((state) => state)
@@ -41,43 +45,44 @@ const Search = ({ props }) => {
           slidesPerView={6}
           onSwiper={(swiper) => console.log(swiper)}
           className='categories'
-          // navigation
+          navigation
+          style={{ direction: 'rtl' }}
         >
           <SwiperSlide>
             <img className='categorie__img' src={category1} alt='...' />
-            <p>Desert</p>
+            <p>{props.categories.desert}</p>
           </SwiperSlide>
           <SwiperSlide>
             <img className='categorie__img' src={category2} alt='...' />
-            <p>Candy</p>
+            <p>{props.categories.candy}</p>
           </SwiperSlide>
           <SwiperSlide>
             <img className='categorie__img' src={category3} alt='...' />
-            <p>Sea Food</p>
+            <p>{props.categories.seaFood}</p>
           </SwiperSlide>
           <SwiperSlide>
             <img className='categorie__img' src={category4} alt='...' />
-            <p>Asian Food</p>
+            <p>{props.categories.grills}</p>
           </SwiperSlide>
           <SwiperSlide>
             <img className='categorie__img' src={category5} alt='...' />
-            <p>Chainaese Food</p>
+            <p>{props.categories.apetizer}</p>
           </SwiperSlide>
           <SwiperSlide>
             <img className='categorie__img' src={category6} alt='...' />
-            <p>Italian Food</p>
+            <p>{props.categories.breakfast}</p>
           </SwiperSlide>
           <SwiperSlide>
             <img className='categorie__img' src={category7} alt='...' />
-            <p>Asian Food</p>
+            <p>{props.categories.launch}</p>
           </SwiperSlide>
           <SwiperSlide>
             <img className='categorie__img' src={category8} alt='...' />
-            <p>Mexicain Food</p>
+            <p>{props.categories.dinner}</p>
           </SwiperSlide>
           <SwiperSlide>
             <img className='categorie__img' src={category9} alt='...' />
-            <p>Japanase Food</p>
+            <p>{props.categories.pastries}</p>
           </SwiperSlide>
         </Swiper>
       </section>

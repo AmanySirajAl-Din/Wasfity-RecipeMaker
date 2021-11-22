@@ -10,8 +10,9 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
+import { getStorage, ref as storageRef,getDownloadURL ,uploadBytesResumable} from "firebase/storage";
 
-import { db } from "../../../firebase";
+import { db ,app} from "../../../firebase";
 import { list } from "@firebase/storage";
 
 export default function AddRecipe(props) {
@@ -32,6 +33,11 @@ export default function AddRecipe(props) {
   const [ingredientList, setIngredientList] = useState([]);
   const [components, setComponents] = useState(["First Ingredient"]);
   const history = useHistory();
+  const [ingerdCatName, setIngredCatName] = useState("");
+  const [image, setImage] = useState(null);
+   const [progress, setProgress] = useState(0);
+    const [url, setUrl] = useState('');
+    const [loading, setLoading] = useState(true);
 
 
   useEffect(async () => {
@@ -49,6 +55,50 @@ export default function AddRecipe(props) {
     console.log("Current Category", currentCat);
     await TestQuery(currentCat.id);
   }, []);
+
+
+
+  function handelChange(e) {
+    if (e.target.files[0],'name',{
+      writable:true,
+      value:new Date()
+    }) 
+      setImage(e.target.files[0])
+
+
+  }
+
+  async function handelUpload() {
+
+    const storage = getStorage(app);
+    const storageReff=storageRef(storage)
+    const imagesRef = storageRef(storageReff, `images/${image.name}`);
+    const uploadTask=uploadBytesResumable(imagesRef,image);
+  
+    console.log(uploadTask);
+    uploadTask.on(
+      "state_changed",(snapshot)=>{
+        const prog =Math.round(
+          (snapshot.bytesTransferred/snapshot.totalBytes)*100
+  
+        );
+        setProgress(prog);
+      },
+      (error)=> console.log(error),
+      ()=>{
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
+  
+          console.log("file available at ",downloadURL);
+          setUrl(downloadURL)
+        });
+       
+      }
+    )
+    
+    
+    console.log(url);
+    }
+  
 
   const TestQuery = async (id) => {
     console.log("call test query", id);
@@ -99,31 +149,31 @@ export default function AddRecipe(props) {
      console.log(ingredientList);
   }
   const AddRecipeHandel = (e) => {
-    console.log("gggggggggg");
+    
     e.preventDefault();
-
+    setIndex(++index);
     addDoc(collection(db, "recipes"), {
       recipeName: recipeName,
       categoryRecipeId: categoryRecipeId,
       recipePreper: recipePreper,
       DegreeOfDifficulty: DegreeOfDifficulty,
+      index:index,
+      imagePath:url
     })
       .then((data) => {
         console.log(data.id);
-
+        setLoading(true)
         addDoc(collection(db, "Ingredients_of_recipe"), {
           ingredientList:ingredientList,
           recipeId:data.id
         })
-          .then(() => {
-            alert("Recipe Added successefuly 👍");
-            return history.push("/RC");
-          })
+          
           .catch((error) => {
             alert(error.message);
+            setLoading(false)
           });
         alert("Recipe Added successefuly 👍");
-        return history.push("/RC");
+        return history.push("/R");
       })
       .catch((error) => {
         alert(error.message);
@@ -166,6 +216,22 @@ export default function AddRecipe(props) {
               onChange={(e) => setRecipeName(e.target.value)}
               placeholder=" اسم الطبخة "
             />
+          </div>
+          <div className="my-4 bg-light p-3">
+          <label className="text-primary font-weight-bold mb-2">
+            Recipe Image{" "}
+          </label>
+          <input
+            type="file"
+            accept=".png, .jpg, .jpeg"
+            required
+            onChange={handelChange}
+          />
+          {loading && <label>loading</label>}
+
+          <button  className="btn-upload-gradiant">
+            Upload
+          </button>
           </div>
           <div className="form-group text-right">
             <label for="FacultyAdress" className="form-label">

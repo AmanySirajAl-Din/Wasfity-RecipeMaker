@@ -78,10 +78,16 @@ export default function Recipes() {
       <table class="table Recipe-container  text-black table-hover">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">التسلسل</th>
+            <th scope="col">اسم الوصفة</th>
+            <th scope="col">طريقة التحضير</th>
+            <th scope="col">المكونات</th>
+            <th scope="col">درجة الصعوبة</th>
+            <th scope="col">وقت الطهي</th>
+            <th scope="col">التقييم</th>
+            <th scope="col">الصورة</th>
+            <th scope="col">الفيديو</th>
+
           </tr>
         </thead>
         <tbody>
@@ -89,7 +95,7 @@ export default function Recipes() {
             return (
               <tr>
                 <th key={recipe.id} scope="row">
-                  1
+                  {recipe.index}
                 </th>
                 <td>{recipe.Title}</td>
                 <td>{recipe.DegreeOfDifficulty}</td>

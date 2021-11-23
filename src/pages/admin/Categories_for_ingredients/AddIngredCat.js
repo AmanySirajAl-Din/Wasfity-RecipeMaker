@@ -8,24 +8,7 @@ import { getStorage, ref as storageRef, uploadBytes } from 'firebase/storage'
 
 export default function AddIngredCat() {
   const [ingerdCatName, setIngredCatName] = useState('')
-  const [image, setImage] = useState(null)
   const history = useHistory()
-
-  function handelChange(e) {
-    if (e.target.files[0]) {
-      setImage(e.target.files[0])
-
-      console.log('ss')
-    }
-  }
-  function handelUpload() {
-    const storage = getStorage(app)
-    const imagesRef = storageRef(storage, `images/${image.name}`)
-    uploadBytes(imagesRef, image).then((snapshot) => {
-      console.log(image)
-      console.log('Uploaded a blob or file!')
-    })
-  }
 
   const AddIngredCatHandel = (e) => {
     e.preventDefault()
@@ -34,12 +17,15 @@ export default function AddIngredCat() {
       ingCatName: ingerdCatName,
     })
       .then(() => {
+        // setError("");
+
         alert('Recipe Added successefuly 👍')
         return history.push('/IC')
       })
       .catch((error) => {
         alert(error.message)
       })
+
     // setRecipeCatName("")
   }
   return (
@@ -73,18 +59,6 @@ export default function AddIngredCat() {
               placeholder=' اسم القسم  '
             />
           </div>
-          <label className='text-primary font-weight-bold mb-2'>
-            Service Image{' '}
-          </label>
-          <input
-            type='file'
-            accept='.png, .jpg, .jpeg'
-            required
-            onChange={handelChange}
-          />
-          <button onClick={handelUpload} className='btn-upload-gradiant'>
-            Upload
-          </button>
           <div>
             {/* <Link to="RC"> */}
             <button type='button ' className='btn btn-dark  my-4'>

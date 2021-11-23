@@ -73,7 +73,7 @@ export default function Recipes() {
 
       <hr />
 
-      <table class="table Recipe-container  text-black table-hover">
+      <table class="table  text-black table-hover">
         <thead>
           <tr>
             <th scope="col">التسلسل</th>
@@ -98,8 +98,13 @@ export default function Recipes() {
                 <td>{recipe.categoryRecipeId}</td>
                 <td>
                   <ul>
-                    {recipe.recipePreperList[{}].map((recipePreperstep) => {
-                      <li>{recipePreperstep.recipePreper}</li>;
+                    {recipe.recipePreperList.map((recipePreperstep) => {
+                      return(
+                        <li>
+                        {recipePreperstep.recipePreper}
+                        </li>
+                   
+                      );
                     })}
                   </ul>
                 </td>

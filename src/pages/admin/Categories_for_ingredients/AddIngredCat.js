@@ -7,17 +7,6 @@ import { useHistory } from 'react-router-dom'
 import { getStorage, ref as storageRef, uploadBytes } from 'firebase/storage'
 
 export default function AddIngredCat() {
-<<<<<<< HEAD
-  
-  const [ingerdCatName, setIngredCatName] = useState("");
-  const history = useHistory();
-   
-
-  
-    
-  
- 
-=======
   const [ingerdCatName, setIngredCatName] = useState('')
   const [image, setImage] = useState(null)
   const history = useHistory()
@@ -37,30 +26,12 @@ export default function AddIngredCat() {
       console.log('Uploaded a blob or file!')
     })
   }
->>>>>>> de7fb182cd5e4250341548d0302f1d9da1afa372
 
   const AddIngredCatHandel = (e) => {
     e.preventDefault()
 
     addDoc(collection(db, 'Categories_for_ingredients'), {
       ingCatName: ingerdCatName,
-<<<<<<< HEAD
-      
-    })
-      .then(() => {
-        // setError("");
-        
-        alert("Recipe Added successefuly 👍");
-        return history.push("/IC");
-      })
-      .catch((error) => {
-        alert(error.message);
-        
-        
-      });
-
-       
-=======
     })
       .then(() => {
         alert('Recipe Added successefuly 👍')
@@ -69,7 +40,6 @@ export default function AddIngredCat() {
       .catch((error) => {
         alert(error.message)
       })
->>>>>>> de7fb182cd5e4250341548d0302f1d9da1afa372
     // setRecipeCatName("")
   }
   return (
@@ -103,8 +73,6 @@ export default function AddIngredCat() {
               placeholder=' اسم القسم  '
             />
           </div>
-<<<<<<< HEAD
-=======
           <label className='text-primary font-weight-bold mb-2'>
             Service Image{' '}
           </label>
@@ -117,7 +85,6 @@ export default function AddIngredCat() {
           <button onClick={handelUpload} className='btn-upload-gradiant'>
             Upload
           </button>
->>>>>>> de7fb182cd5e4250341548d0302f1d9da1afa372
           <div>
             {/* <Link to="RC"> */}
             <button type='button ' className='btn btn-dark  my-4'>

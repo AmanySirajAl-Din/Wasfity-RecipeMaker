@@ -7,36 +7,25 @@ import { useHistory } from 'react-router-dom'
 import { getStorage, ref as storageRef, uploadBytes } from 'firebase/storage'
 
 export default function AddIngredCat() {
-  
-  const [ingerdCatName, setIngredCatName] = useState("");
-  const history = useHistory();
-   
-
-  
-    
-  
- 
+  const [ingerdCatName, setIngredCatName] = useState('')
+  const history = useHistory()
 
   const AddIngredCatHandel = (e) => {
     e.preventDefault()
 
     addDoc(collection(db, 'Categories_for_ingredients'), {
       ingCatName: ingerdCatName,
-      
     })
       .then(() => {
         // setError("");
-        
-        alert("Recipe Added successefuly 👍");
-        return history.push("/IC");
+
+        alert('Recipe Added successefuly 👍')
+        return history.push('/IC')
       })
       .catch((error) => {
-        alert(error.message);
-        
-        
-      });
+        alert(error.message)
+      })
 
-       
     // setRecipeCatName("")
   }
   return (

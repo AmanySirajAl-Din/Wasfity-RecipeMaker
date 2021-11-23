@@ -24,7 +24,14 @@ function App() {
         <div>
           <div>
             <Navbar />
-            <div className='d-flex'>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                overflowX: 'hidden',
+              }}
+            >
               <div>
                 <Sidbar />
               </div>

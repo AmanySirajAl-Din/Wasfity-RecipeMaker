@@ -26,11 +26,7 @@ export default function Sidbar() {
           Dashboard
         </li>
         <hr />
-<<<<<<< HEAD
        
-=======
-
->>>>>>> de7fb182cd5e4250341548d0302f1d9da1afa372
         <Accordion>
           <li>
             <Accordion.Item eventKey='0'>
@@ -48,15 +44,9 @@ export default function Sidbar() {
                     fill-rule='evenodd'
                     d='M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z'
                   />
-<<<<<<< HEAD
                   <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
                 </svg>{" "}
                 Users
-=======
-                  <path d='M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z' />
-                </svg>{' '}
-                Recipes
->>>>>>> de7fb182cd5e4250341548d0302f1d9da1afa372
               </Accordion.Header>
               <Accordion.Body>
                 <li>
@@ -69,16 +59,9 @@ export default function Sidbar() {
             </Accordion.Item>
           </li>
         </Accordion>
-<<<<<<< HEAD
         <Accordion>
           <li>
             <Accordion.Item eventKey="0">
-=======
-
-        <li>
-          <Accordion>
-            <Accordion.Item eventKey='0'>
->>>>>>> de7fb182cd5e4250341548d0302f1d9da1afa372
               <Accordion.Header>
                 {' '}
                 <svg
@@ -93,7 +76,6 @@ export default function Sidbar() {
                     fill-rule='evenodd'
                     d='M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z'
                   />
-<<<<<<< HEAD
                   <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
                 </svg>{" "}
                 Recipes
@@ -104,18 +86,6 @@ export default function Sidbar() {
                 </li>
                 <li>
                   <Link to="addRecipe">ADD recipe</Link>
-=======
-                  <path d='M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z' />
-                </svg>{' '}
-                Category_of_Recipes
-              </Accordion.Header>
-              <Accordion.Body>
-                <li>
-                  <Link to='RC'>Category</Link>
-                </li>
-                <li>
-                  <Link to='addRecipeCat'>Add Category</Link>
->>>>>>> de7fb182cd5e4250341548d0302f1d9da1afa372
                 </li>
               </Accordion.Body>
             </Accordion.Item>
@@ -139,7 +109,6 @@ export default function Sidbar() {
                     fill-rule='evenodd'
                     d='M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z'
                   />
-<<<<<<< HEAD
                   <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
                 </svg>{" "}
                 Category_of_Recipes
@@ -150,18 +119,6 @@ export default function Sidbar() {
                 </li>
                 <li>
                   <Link to="addRecipeCat">Add Category</Link>
-=======
-                  <path d='M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z' />
-                </svg>{' '}
-                Category_of_ingredients
-              </Accordion.Header>
-              <Accordion.Body>
-                <li>
-                  <Link to='IC'>Category</Link>
-                </li>
-                <li>
-                  <Link to='AddIngredCat'>Add Category</Link>
->>>>>>> de7fb182cd5e4250341548d0302f1d9da1afa372
                 </li>
                 
               </Accordion.Body>
@@ -184,7 +141,6 @@ export default function Sidbar() {
                     fill-rule='evenodd'
                     d='M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z'
                   />
-<<<<<<< HEAD
                   <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
                 </svg>{" "}
                 Category_of_ingredients
@@ -197,18 +153,6 @@ export default function Sidbar() {
                 <li>
                   <Link to="AddIngredCat">Add Category</Link>
                 </li>
-=======
-                  <path d='M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z' />
-                </svg>
-                Ingredients
-              </Accordion.Header>
-              <Accordion.Body>
-                <li>
-                  <Link to='Ingredients'>Ingredients</Link>
-                </li>
-                <li>
-                  <Link to='AddIngredients'>Add Ingredient</Link>
-                </li>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
@@ -230,45 +174,9 @@ export default function Sidbar() {
                     fill-rule='evenodd'
                     d='M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z'
                   />
-                  <path d='M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z' />
-                </svg>{' '}
-                Category_of_Recipes
-              </Accordion.Header>
-              <Accordion.Body>
-                <li>Recipes</li>
-                <li>Category_of_recipes</li>
-                <li>ADD recipe</li>
->>>>>>> de7fb182cd5e4250341548d0302f1d9da1afa372
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-        </li>
-        <li>
-          <Accordion>
-            <Accordion.Item eventKey='0'>
-              <Accordion.Header>
-                {' '}
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='16'
-                  height='16'
-                  fill='currentColor'
-                  class='bi bi-bookmark-heart'
-                  viewBox='0 0 16 16'
-                >
-                  <path
-                    fill-rule='evenodd'
-                    d='M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z'
-                  />
-<<<<<<< HEAD
                   <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
                 </svg>{" "}
                 Ingredients
-=======
-                  <path d='M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z' />
-                </svg>{' '}
-                Category_of_Recipes
->>>>>>> de7fb182cd5e4250341548d0302f1d9da1afa372
               </Accordion.Header>
               <Accordion.Body>
               <li>

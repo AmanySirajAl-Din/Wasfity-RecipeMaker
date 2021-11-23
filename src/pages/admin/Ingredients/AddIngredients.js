@@ -11,39 +11,38 @@ import {
   getDocs,
   where,
   query,
-  
-  
 } from "firebase/firestore";
+import { isDoExpression } from "@babel/types";
 
 export default function AddIngredients() {
   const history = useHistory();
   const [Category_of_ingredients, setCatIngred] = useState([]);
   const [ingredientName, setIngredientName] = useState("");
   const [categoryId, setCategoryId] = useState("");
+  let [index, setIndex] = useState(0);
 
-  
   useEffect(
     () =>
       onSnapshot(collection(db, "Categories_for_ingredients"), (snapshot) =>
-      setCatIngred(snapshot.docs.map((doc) =>({...doc.data(),id:doc.id}) ))
+        setCatIngred(
+          snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        )
       ),
     []
   );
-  
+
   const AddHandel = (e) => {
     e.preventDefault();
-      //  console.log("add")
-
-         addDoc(collection(db, "Ingredients"), {
-           
-        ingName:ingredientName,
-        categoryId:categoryId
-     
+    //  console.log("add")
+    setIndex(++index);
+    addDoc(collection(db, "Ingredients"), {
+      ingName: ingredientName,
+      categoryId: categoryId,
+      index:index,
     })
- 
       .then(() => {
         alert("ingredient Added successefuly thum");
-        return  history.push("/Ingredients")
+        return history.push("/Ingredients");
       })
       .catch((error) => {
         alert(error.message);
@@ -86,38 +85,33 @@ export default function AddIngredients() {
             <label for="FacultyAdress" className="form-label">
               التصنيف{" "}
             </label>
-            
+
             <select
               className="form-select form-control"
-              
               id="FacultyAdress"
               value={categoryId}
+              onChange={(e) => {
+                setCategoryId(e.target.value);
+                let value = e.target.value;
+                console.log(value);
 
-              onChange={(e) =>{
-                setCategoryId(e.target.value)
-                let value=e.target.value;
-                console.log(value)
-      
-        //  let value = Array.from(e.target.selectedOptions, option => option.value);
-        //  console.log(value);
-        // setCategoryId(value);
-  
-
-            } }
-        >
+                //  let value = Array.from(e.target.selectedOptions, option => option.value);
+                //  console.log(value);
+                // setCategoryId(value);
+              }}
+            >
               {Category_of_ingredients.map((Category_of_ingredient) => {
-              return (
-              <option value={Category_of_ingredient.id}> {Category_of_ingredient.ingCatName} </option>
-              );
-            })}
+                return (
+                  <option value={Category_of_ingredient.id}>
+                    {" "}
+                    {Category_of_ingredient.ingCatName}{" "}
+                  </option>
+                );
+              })}
             </select>
           </div>
-          
-          <button  className="btn btn-dark">
-            اضف
-          </button>
-          
-          
+
+          <button className="btn btn-dark">اضف</button>
         </div>
       </form>
     </div>

@@ -60,7 +60,6 @@ export default function AddIngredients() {
         alert(error.message);
       });
     setIngredientName("");
-    setCategoryId("اختر التصنيف");
   };
   return (
     <div className=" add-ingredient ">
@@ -95,14 +94,14 @@ export default function AddIngredients() {
             />
           </div>
           <div className="form-group text-right">
-            <label for="categoryId" className="form-label">
+            <label for="FacultyAdress" className="form-label">
               التصنيف{" "}
             </label>
             
             <select
               className="form-select form-control"
               
-              id="categoryId"
+              id="FacultyAdress"
               value={categoryId}
 
               onChange={(e) =>{

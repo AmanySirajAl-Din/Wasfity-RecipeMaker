@@ -16,6 +16,7 @@ import {
 
 export default function Ingredients() {
   const [Ingredients, setIngredients] = useState([]);
+  
   // console.log(recipes);
   useEffect(
     () =>
@@ -25,20 +26,24 @@ export default function Ingredients() {
     []
   );
 
-  const editRecipe = async (id) => {
-    const docRef = doc(db, "Ingredients", id);
-    const payload = {
-      Title: "عنب",
-      DegreeOfDifficulty: "سهل",
-      Evaluation: 5,
-      Photo: "gggggg",
-      TimePreper: "7hours",
-      Video: "jkjjjjjjj",
-      ReciprPrepare: "iii",
-    };
-     await setDoc(docRef, payload);
-     console.log(  setDoc(docRef, payload).id)
-  };
+
+
+  
+
+  // const editRecipe = async (id) => {
+  //   const docRef = doc(db, "Ingredients", id);
+  //   const payload = {
+  //     Title: "عنب",
+  //     DegreeOfDifficulty: "سهل",
+  //     Evaluation: 5,
+  //     Photo: "gggggg",
+  //     TimePreper: "7hours",
+  //     Video: "jkjjjjjjj",
+  //     ReciprPrepare: "iii",
+  //   };
+  //    await setDoc(docRef, payload);
+  //    console.log(  setDoc(docRef, payload).id)
+  // };
   
 
   const deleteRecipe = async (id) => {
@@ -79,14 +84,14 @@ export default function Ingredients() {
             return (
               <tr>
                 <th key={Ingredient.id} scope="row">
-                {Ingredient.id}
+                {Ingredient.index}
                 </th>
                 <td>{Ingredient.ingName}</td>
-                <td>{Ingredient.ingName}</td>
+                
             
                 <td>
                   <Link to="/EditIngredients">
-                  <button onClick={()=>editRecipe(Ingredient.id)}>Edit</button>
+                  <button >Edit</button>
                   </Link>
                 </td>
                 <td><button onClick={()=>deleteRecipe(Ingredient.id)}>Delete</button></td>

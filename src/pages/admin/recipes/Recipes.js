@@ -2,7 +2,7 @@ import React from "react";
 import "./Recipes.css";
 import { useEffect, useState } from "react";
 import { db } from "../../../firebase";
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import {
   collection,
@@ -11,7 +11,7 @@ import {
   doc,
   setDoc,
   addDoc,
-  deleteDoc
+  deleteDoc,
 } from "firebase/firestore";
 
 export default function Recipes() {
@@ -20,7 +20,7 @@ export default function Recipes() {
   useEffect(
     () =>
       onSnapshot(collection(db, "recipes"), (snapshot) =>
-        setRecipes(snapshot.docs.map((doc) =>({...doc.data(),id:doc.id}) ))
+        setRecipes(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
       ),
     []
   );
@@ -36,8 +36,8 @@ export default function Recipes() {
       Video: "jkjjjjjjj",
       ReciprPrepare: "iii",
     };
-     await setDoc(docRef, payload);
-     console.log(  setDoc(docRef, payload).id)
+    await setDoc(docRef, payload);
+    console.log(setDoc(docRef, payload).id);
   };
   const addRecipe = async () => {
     const collectionRef = collection(db, "recipes");
@@ -54,8 +54,8 @@ export default function Recipes() {
   };
   const deleteRecipe = async (id) => {
     const docRef = doc(db, "recipes", id);
-     await deleteDoc(docRef);
-     console.log(  deleteDoc(docRef).id)
+    await deleteDoc(docRef);
+    console.log(deleteDoc(docRef).id);
   };
 
   return (
@@ -65,9 +65,7 @@ export default function Recipes() {
           <a class="navbar-brand heading-word ">Recipes</a>
           <div class="d-flex">
             <Link to="addRecipe">
-              <button class="btn btn-outline-warning" >
-                Add
-              </button>
+              <button class="btn btn-outline-warning">Add</button>
             </Link>
           </div>
         </div>
@@ -87,7 +85,6 @@ export default function Recipes() {
             <th scope="col">التقييم</th>
             <th scope="col">الصورة</th>
             <th scope="col">الفيديو</th>
-
           </tr>
         </thead>
         <tbody>
@@ -97,14 +94,32 @@ export default function Recipes() {
                 <th key={recipe.id} scope="row">
                   {recipe.index}
                 </th>
-                <td>{recipe.Title}</td>
+                <td>{recipe.recipeName}</td>
+                <td>{recipe.categoryRecipeId}</td>
+                <td>
+                  <ul>
+                    {recipe.recipePreperList[{}].map((recipePreperstep) => {
+                      <li>{recipePreperstep.recipePreper}</li>;
+                    })}
+                  </ul>
+                </td>
                 <td>{recipe.DegreeOfDifficulty}</td>
-                <td>@mdo</td>
                 <td>{recipe.DegreeOfDifficulty}</td>
-                <td>@mdo</td>
                 <td>{recipe.DegreeOfDifficulty}</td>
-                <td><button onClick={()=>editRecipe(recipe.id)}>Edit</button></td>
-                <td><button onClick={()=>deleteRecipe(recipe.id)}>Delete</button></td>
+                <td>{recipe.DegreeOfDifficulty}</td>
+                <td>{recipe.DegreeOfDifficulty}</td>
+                <td>
+                  <img src={recipe.imagePath} width="100" height="100" />
+                </td>
+
+                <td>
+                  <button onClick={() => editRecipe(recipe.id)}>Edit</button>
+                </td>
+                <td>
+                  <button onClick={() => deleteRecipe(recipe.id)}>
+                    Delete
+                  </button>
+                </td>
               </tr>
             );
           })}

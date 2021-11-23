@@ -10,14 +10,21 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
-import { getStorage, ref as storageRef,getDownloadURL ,uploadBytesResumable} from "firebase/storage";
+//  Image configration  
+import {
+  getStorage,
+  ref as storageRef,
+  getDownloadURL,
+  uploadBytesResumable,
+} from "firebase/storage";
+// firestore configration 
+import { db, app } from "../../../firebase";
 
-import { db ,app} from "../../../firebase";
-import { list } from "@firebase/storage";
 
 export default function AddRecipe(props) {
   const [recipeId, setRecipeId] = useState("");
   const [Category_of_recipes, setRecipeCat] = useState([]);
+  const [recipePreperTime, setRecipePreperTime] = useState("");
   const [recipeName, setRecipeName] = useState("");
   const [recipePreper, setRecipePreper] = useState("");
   const [DegreeOfDifficulty, setDegreeOfDifficulty] = useState("");
@@ -33,12 +40,11 @@ export default function AddRecipe(props) {
   const [ingredientList, setIngredientList] = useState([]);
   const [components, setComponents] = useState(["First Ingredient"]);
   const history = useHistory();
-  const [ingerdCatName, setIngredCatName] = useState("");
+  const [recipePreperList, setRecipePreperList] = useState([]);
   const [image, setImage] = useState(null);
-   const [progress, setProgress] = useState(0);
-    const [url, setUrl] = useState('');
-    const [loading, setLoading] = useState(true);
-
+  const [progress, setProgress] = useState(0);
+  const [url, setUrl] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(async () => {
     await onSnapshot(
@@ -56,49 +62,46 @@ export default function AddRecipe(props) {
     await TestQuery(currentCat.id);
   }, []);
 
-
-
   function handelChange(e) {
-    if (e.target.files[0],'name',{
-      writable:true,
-      value:new Date()
-    }) 
-      setImage(e.target.files[0])
-
-
+    if (
+      (e.target.files[0],
+      "name",
+      {
+        writable: true,
+        value: new Date(),
+      })
+    )
+      setImage(e.target.files[0]);
   }
 
-  async function handelUpload() {
+  async function handelUpload(e) {
+    e.preventDefault();
 
     const storage = getStorage(app);
-    const storageReff=storageRef(storage)
+    const storageReff = storageRef(storage);
     const imagesRef = storageRef(storageReff, `images/${image.name}`);
-    const uploadTask=uploadBytesResumable(imagesRef,image);
-  
+    const uploadTask = uploadBytesResumable(imagesRef, image);
+
     console.log(uploadTask);
     uploadTask.on(
-      "state_changed",(snapshot)=>{
-        const prog =Math.round(
-          (snapshot.bytesTransferred/snapshot.totalBytes)*100
-  
+      "state_changed",
+      (snapshot) => {
+        const prog = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
         setProgress(prog);
       },
-      (error)=> console.log(error),
-      ()=>{
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
-  
-          console.log("file available at ",downloadURL);
-          setUrl(downloadURL)
+      (error) => console.log(error),
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log("file available at ", downloadURL);
+          setUrl(downloadURL);
         });
-       
       }
-    )
-    
-    
+    );
+
     console.log(url);
-    }
-  
+  }
 
   const TestQuery = async (id) => {
     console.log("call test query", id);
@@ -131,6 +134,23 @@ export default function AddRecipe(props) {
     []
   );
 
+  // To push all preperation steps in list
+  function RecipePreperList(e) {
+    e.preventDefault();
+    setIndex(++index);
+    // console.log(index);
+    setRecipePreperList([
+      ...recipePreperList,
+      {
+        index:index,
+        recipePreper: recipePreper,
+        
+      },
+    ]);
+    console.log(recipePreperList);
+  }
+
+
   function addIngerdRecipe(e) {
     e.preventDefault();
     setIndex(++index);
@@ -140,38 +160,37 @@ export default function AddRecipe(props) {
       {
         currentCat: currentCat,
         currentIngredient: currentIngredient,
-        personNum: personNum,
+        
         quant: quant,
         unit: unit,
         index: index,
       },
     ]);
-     console.log(ingredientList);
+    console.log(ingredientList);
   }
   const AddRecipeHandel = (e) => {
-    
     e.preventDefault();
     setIndex(++index);
     addDoc(collection(db, "recipes"), {
+      index: index,
       recipeName: recipeName,
       categoryRecipeId: categoryRecipeId,
-      recipePreper: recipePreper,
+      recipePreperList:recipePreperList,
       DegreeOfDifficulty: DegreeOfDifficulty,
-      index:index,
-      imagePath:url
+      imagePath: url,
+      personNum: personNum,
+      recipePreperTime:recipePreperTime
     })
       .then((data) => {
         console.log(data.id);
-        setLoading(true)
+        setLoading(true);
         addDoc(collection(db, "Ingredients_of_recipe"), {
-          ingredientList:ingredientList,
-          recipeId:data.id
-        })
-          
-          .catch((error) => {
-            alert(error.message);
-            setLoading(false)
-          });
+          ingredientList: ingredientList,
+          recipeId: data.id,
+        }).catch((error) => {
+          alert(error.message);
+          setLoading(false);
+        });
         alert("Recipe Added successefuly 👍");
         return history.push("/R");
       })
@@ -182,9 +201,6 @@ export default function AddRecipe(props) {
     // setRecipeCatName("")
   };
 
- 
-
-  
   return (
     <div className=" add-recipe ">
       <form className="form" onSubmit={AddRecipeHandel}>
@@ -218,20 +234,32 @@ export default function AddRecipe(props) {
             />
           </div>
           <div className="my-4 bg-light p-3">
-          <label className="text-primary font-weight-bold mb-2">
-            Recipe Image{" "}
-          </label>
-          <input
-            type="file"
-            accept=".png, .jpg, .jpeg"
-            required
-            onChange={handelChange}
-          />
-          {loading && <label>loading</label>}
+            <label className="text-primary font-weight-bold mb-2">
+            {loading && (
+              <label>
+                <img
+                  src={url || "http://via.placeholder.com/100"}
+                  alt="firebase-image"
+                  width="100"
+                  height="100"
+                />
+                <div> Recipe Imege</div>
+                
+                <progress value={progress} max="100" />
+              </label>
+            )}
+            </label>
+            <input
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              required
+              onChange={handelChange}
+            />
+           
 
-          <button  className="btn-upload-gradiant">
-            Upload
-          </button>
+            <button className="btn-upload-gradiant" onClick={handelUpload}>
+              Upload
+            </button>
           </div>
           <div className="form-group text-right">
             <label for="FacultyAdress" className="form-label">
@@ -329,17 +357,7 @@ export default function AddRecipe(props) {
                       }}
                       placeholder=" الكمية"
                     />
-                    <input
-                      type="number"
-                      className="form-control mt-2"
-                      id="personNum"
-                      placeholder=" تكفي كام شخص"
-                      value={personNum}
-                      onChange={(e) => {
-                        setPersonNum(e.target.value);
-                        console.log(e.target.value);
-                      }}
-                    />
+                   
                     <select
                       className="form-select form-select-sm mt-2"
                       aria-label=".form-select-sm example"
@@ -369,21 +387,27 @@ export default function AddRecipe(props) {
                 <table class="table ">
                   <thead>
                     <tr>
+                      <th>Delete</th>
+                      <th>Edit</th>
                       <th scope="col">Index</th>
                       <th scope="col">Category</th>
                       <th scope="col">Name</th>
                       <th scope="col">Quantity</th>
+                      
                     </tr>
                   </thead>
                   <tbody>
                     {ingredientList.map((ingredlist) => {
                       return (
                         <tr>
+                          <td>Delete</td>
+                          <td>Edit</td>
                           <th>{ingredlist.index}</th>
                           <td>{ingredlist.quant}</td>
                           <td>{ingredlist.unit}</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
+                         
+                         
+                          
                         </tr>
                       );
                     })}
@@ -409,9 +433,9 @@ export default function AddRecipe(props) {
                 />
               </div>
 
-              <button className="add-btn" onClick={addIngerdRecipe}>
+              <button className="add-btn btn-dark" onClick={RecipePreperList}>
                 {" "}
-                إضافة مكون
+            اضف
               </button>
             </div>
             <div className="ingred-table">
@@ -423,11 +447,11 @@ export default function AddRecipe(props) {
                   </tr>
                 </thead>
                 <tbody>
-                  {ingredientList.map((ingredlist) => {
+                  {recipePreperList.map((recipePreperList) => {
                     return (
                       <tr>
-                        <th>{ingredlist.index}</th>
-                        <td>{ingredlist.quant}</td>
+                        <th>{recipePreperList.index}</th>
+                        <td>{recipePreperList.recipePreper}</td>
                       </tr>
                     );
                   })}
@@ -454,6 +478,17 @@ export default function AddRecipe(props) {
               <option>صعب</option>
             </select>
           </div>
+          <input
+                      type="number"
+                      className="form-control mt-2"
+                      id="personNum"
+                      placeholder=" تكفي كام شخص"
+                      value={personNum}
+                      onChange={(e) => {
+                        setPersonNum(e.target.value);
+                        console.log(e.target.value);
+                      }}
+                    />
 
           <div className="form-group text-right">
             <label for="studentId" className="form-label">
@@ -468,8 +503,26 @@ export default function AddRecipe(props) {
               readOnly
             />
           </div>
+          <div className="form-group text-right">
+            <label for="studentId" className="form-label">
+              {" "}
+              مدة الطهي
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="time"
+              placeholder=" مدة الطهي "
+              value={recipePreperTime}
+                      onChange={(e) => {
+                        setRecipePreperTime(e.target.value);
+                        console.log(e.target.value);
+                      }}
+             
+            />
+          </div>
           <br />
-          <button type="submit" className="btn btn-success">
+          <button type="submit" className="btn btn-dark">
             اضف
           </button>
         </div>

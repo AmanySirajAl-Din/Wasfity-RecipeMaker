@@ -29,6 +29,11 @@
   flex-direction: column;
   gap: 0.5rem;
   text-align: left;
+  width: 100%;
+}
+.hero__slide {
+  padding: 0 1rem;
+  justify-content: initial;
 }
 .hero__main h3 {
   margin: 0.5rem 0;

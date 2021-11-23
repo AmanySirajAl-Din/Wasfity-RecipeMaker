@@ -1,15 +1,27 @@
 import './hero.css'
 import heroLeft1 from '../../../assets/img/hero-left1.jfif'
 import heroLeft2 from '../../../assets/img/hero-left2.jfif'
-import heroMain from '../../../assets/img/hero-main4.jfif'
+import heroMain from '../../../assets/img/hero-main.jfif'
+import heroMain2 from '../../../assets/img/hero-main2.jfif'
+import heroMain3 from '../../../assets/img/hero-main3.jfif'
+import heroMain4 from '../../../assets/img/hero-main4.jfif'
 import heroPopular1 from '../../../assets/img/hero-popular1.jfif'
 import heroPopular2 from '../../../assets/img/hero-popular2.jfif'
 import heroPopular3 from '../../../assets/img/hero-popular3.jfif'
 import heroPopular4 from '../../../assets/img/hero-popular4.jfif'
 import { useSelector } from 'react-redux'
 
+/* Swiper Slider */
+import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
+import SwiperCore, { Autoplay } from 'swiper'
+import 'swiper/modules/navigation/navigation.min.css'
+
+import 'swiper/swiper-bundle.css'
+
 const Hero = ({ props }) => {
   const lang = useSelector((state) => state)
+
+  SwiperCore.use([Autoplay])
   return (
     <div className='hero__container'>
       <section className='hero'>
@@ -38,22 +50,80 @@ const Hero = ({ props }) => {
           </div>
         </div>
 
-        <div className='hero__main'>
-          <img src={heroMain} alt='' className='hero__main-img' />
-          <h3
-            className='hero__main-title'
-            style={
-              lang === 'en' ? { textAlign: 'left' } : { textAlign: 'right' }
-            }
-          >
-            {props.best}
-          </h3>
-          <p className='hero__main-description'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
-            consectetur optio consequuntur odio illo vitae corrupti, dolorum cum
-            non veniam?
-          </p>
-        </div>
+        {/* Hero Main Slider */}
+        <Swiper
+          spaceBetween={10}
+          slidesPerView={1}
+          onSwiper={(swiper) => console.log(swiper)}
+          className='hero__main'
+          autoplay={{ delay: 3000 }}
+          style={{ direction: 'rtl' }}
+        >
+          <SwiperSlide className='hero__slide'>
+            <img src={heroMain} alt='' className='hero__main-img' />
+            <h3
+              className='hero__main-title'
+              style={
+                lang === 'en' ? { textAlign: 'left' } : { textAlign: 'right' }
+              }
+            >
+              {props.best}
+            </h3>
+            <p className='hero__main-description'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
+              consectetur optio consequuntur odio illo vitae corrupti, dolorum
+              cum non veniam?
+            </p>
+          </SwiperSlide>
+          <SwiperSlide className='hero__slide'>
+            <img src={heroMain2} alt='' className='hero__main-img' />
+            <h3
+              className='hero__main-title'
+              style={
+                lang === 'en' ? { textAlign: 'left' } : { textAlign: 'right' }
+              }
+            >
+              {props.best}
+            </h3>
+            <p className='hero__main-description'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
+              consectetur optio consequuntur odio illo vitae corrupti, dolorum
+              cum non veniam?
+            </p>
+          </SwiperSlide>
+          <SwiperSlide className='hero__slide'>
+            <img src={heroMain3} alt='' className='hero__main-img' />
+            <h3
+              className='hero__main-title'
+              style={
+                lang === 'en' ? { textAlign: 'left' } : { textAlign: 'right' }
+              }
+            >
+              {props.best}
+            </h3>
+            <p className='hero__main-description'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
+              consectetur optio consequuntur odio illo vitae corrupti, dolorum
+              cum non veniam?
+            </p>
+          </SwiperSlide>
+          <SwiperSlide className='hero__slide'>
+            <img src={heroMain4} alt='' className='hero__main-img' />
+            <h3
+              className='hero__main-title'
+              style={
+                lang === 'en' ? { textAlign: 'left' } : { textAlign: 'right' }
+              }
+            >
+              {props.best}
+            </h3>
+            <p className='hero__main-description'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
+              consectetur optio consequuntur odio illo vitae corrupti, dolorum
+              cum non veniam?
+            </p>
+          </SwiperSlide>
+        </Swiper>
 
         <div className='hero__popular'>
           <h2 className='hero__popular-title'>{props.popular}</h2>

@@ -122,7 +122,7 @@ const Footer = ({ intl: { messages } }) => {
         </div>
       </div>
 
-      <p className='copyright'>{other.rights} &copy; 2020</p>
+      <p className='copyright'>{other.rights} &copy; 2021</p>
     </footer>
   )
 }

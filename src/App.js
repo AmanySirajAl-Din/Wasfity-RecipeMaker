@@ -2,26 +2,27 @@ import './App.css'
 import Home from './pages/site/home/home'
 import Nav from './components/site/nav/nav'
 import Profile from './pages/site/profile/profile'
+import Footer from './components/site/footer/footer'
 import { useSelector } from 'react-redux'
-import Footer from './components/admin/footer/Footer'
-import Sidbar from './components/admin/sidbar/Sidbar'
-import { useEffect } from 'react'
-import { db } from './firebase'
-import { collection, getDocs, onSnapshot } from 'firebase/firestore'
-import Navbar from './components/admin/Navbar/Navbar'
-import Recipes from './pages/admin/recipes/Recipes'
+// import Footer from './components/admin/footer/Footer'
+// import Sidbar from './components/admin/sidbar/Sidbar'
+// import { useEffect } from 'react'
+// import { db } from './firebase'
+// import { collection, getDocs, onSnapshot } from 'firebase/firestore'
+// import Navbar from './components/admin/Navbar/Navbar'
+// import Recipes from './pages/admin/recipes/Recipes'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import RecipeDetails from './pages/site/recipeDetails/recipeDetails'
 import { IntlProvider } from 'react-intl'
 import langs from './assets/translation/langs'
-import Loader from './Loader'
-import addRecipe from './pages/admin/recipes/AddRecipe'
-import AddRecipeCat from './pages/admin/category_of_recipes/AddRecipeCat'
-import Category_of_recipes from './pages/admin/category_of_recipes/Category_of_recipes'
-import Category_of_ingredients from './pages/admin/Categories_for_ingredients/Categories_for_ingredients'
-import AddIngredCat from './pages/admin/Categories_for_ingredients/AddIngredCat'
-import Ingredients from './pages/admin/Ingredients/Ingredients'
-import AddIngredients from './pages/admin/Ingredients/AddIngredients'
+// import Loader from './Loader'
+// import addRecipe from './pages/admin/recipes/AddRecipe'
+// import AddRecipeCat from './pages/admin/category_of_recipes/AddRecipeCat'
+// import Category_of_recipes from './pages/admin/category_of_recipes/Category_of_recipes'
+// import Category_of_ingredients from './pages/admin/Categories_for_ingredients/Categories_for_ingredients'
+// import AddIngredCat from './pages/admin/Categories_for_ingredients/AddIngredCat'
+// import Ingredients from './pages/admin/Ingredients/Ingredients'
+// import AddIngredients from './pages/admin/Ingredients/AddIngredients'
 // import { useDispatch } from "react-redux";
 // import { onAuthStateChanged } from "firebase/auth";
 // import { auth } from "./firebase";
@@ -40,7 +41,7 @@ function App() {
       {/* <Router>
     <div className="App"> */}
 
-      <Router>
+      {/* <Router>
         <div>
           <div className='d-flex'>
             <div>
@@ -92,8 +93,8 @@ function App() {
         </div>
 
         <Footer />
-      </Router>
-      {/* <IntlProvider locale={lang} messages={langs[lang]}>
+      </Router> */}
+      <IntlProvider locale={lang} messages={langs[lang]}>
         <Router>
           <div // Handle Language
             className={lang === 'ar' ? 'rtl' : 'ltr'}
@@ -108,7 +109,7 @@ function App() {
             <Footer />
           </div>
         </Router>
-      </IntlProvider> */}
+      </IntlProvider>
     </div>
   )
 }

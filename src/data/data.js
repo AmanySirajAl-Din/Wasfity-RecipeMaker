@@ -93,7 +93,7 @@ export const data = [
     time: '35 mins',
     difficulty: 'medium',
     video: '',
-    category: 'ِppetizer',
+    category: 'Apetizer',
     description:
       "This delicious, cream-like soup is served at our family's Thanksgiving dinner",
   },

@@ -1,7 +1,7 @@
 import './hero.css'
 import heroLeft1 from '../../../assets/img/hero-left1.jfif'
 import heroLeft2 from '../../../assets/img/hero-left2.jfif'
-import heroMain from '../../../assets/img/hero-main.jfif'
+import heroMain from '../../../assets/img/hero-main4.jfif'
 import heroPopular1 from '../../../assets/img/hero-popular1.jfif'
 import heroPopular2 from '../../../assets/img/hero-popular2.jfif'
 import heroPopular3 from '../../../assets/img/hero-popular3.jfif'

@@ -11,3 +11,11 @@
     color: #000 important!;
     padding: 5px;
   }
+  .website-name{
+    font-size: 20px;
+    font-weight: bold;
+    color: F8AB15;
+  }
+  .profile-img{
+    border: 2px solid rgb(17, 3, 3);
+  }

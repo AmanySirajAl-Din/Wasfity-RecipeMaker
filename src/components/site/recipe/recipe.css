@@ -6,6 +6,7 @@
   color: #333;
   background-color: #fff;
   transition: 0.3s;
+  border-radius: 20px;
 }
 .one-recipe:hover {
   box-shadow: 0 8px 32px hsla(0, 0%, 10%, 0.1);
@@ -13,8 +14,7 @@
 
 .one-recipe__img {
   overflow: hidden;
-  width: 100%;
-  height: 100%;
+  border-radius: 20px 20px 0 0;
 }
 .one-recipe:hover .one-recipe__img img {
   transform: scale(1.05);

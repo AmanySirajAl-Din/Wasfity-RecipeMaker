@@ -39,7 +39,9 @@
   /* right: 3%; */
 }
 .search__input {
-  padding: 0.4rem 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 20px;
   outline: none;
   width: 100%;
 }
@@ -67,9 +69,6 @@
 }
 .categorie__img {
   border-radius: 50%;
-  max-width: 100%;
-  height: auto;
-  display: block;
 }
 
 @media (max-width: 950px) {

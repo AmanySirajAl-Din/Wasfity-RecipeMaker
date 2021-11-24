@@ -16,6 +16,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  cursor: pointer;
 }
 .meal__title {
   text-align: left;
@@ -34,6 +35,13 @@
 .hero__slide {
   padding: 0 1rem;
   justify-content: initial;
+  cursor: pointer;
+}
+.meal__img,
+.hero__main-img,
+.pop-meal-img {
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
 }
 .hero__main h3 {
   margin: 0.5rem 0;
@@ -48,6 +56,7 @@
   flex-direction: column;
   gap: 2rem;
   height: fit-content;
+  border-radius: 20px;
 }
 .hero__popular-meals {
   display: flex;
@@ -58,6 +67,7 @@
   display: flex;
   gap: 0.5rem;
   text-align: left;
+  cursor: pointer;
 }
 
 /* Mediam Screens */

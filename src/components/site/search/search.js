@@ -9,6 +9,7 @@ import category7 from '../../../assets/img/category7.jfif'
 import category8 from '../../../assets/img/category8.jfif'
 import category9 from '../../../assets/img/category9.jfif'
 import { useSelector } from 'react-redux'
+import { useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
 import SwiperCore, { Navigation, Autoplay } from 'swiper'
 import 'swiper/modules/navigation/navigation.min.css'
@@ -19,9 +20,14 @@ import 'swiper/swiper-bundle.css'
 const Search = ({ props }) => {
   const lang = useSelector((state) => state)
   SwiperCore.use([Navigation, Autoplay])
+  const swiperRef = useRef(null)
   return (
     <div className='search-container'>
-      <section className='search'>
+      <section
+        className='search'
+        onMouseEnter={() => swiperRef.current.swiper.autoplay.stop()}
+        onMouseLeave={() => swiperRef.current.swiper.autoplay.start()}
+      >
         <div className='search__bar'>
           <label className='search__label'>
             <input className='search__input' placeholder={props.recipe} />
@@ -32,7 +38,7 @@ const Search = ({ props }) => {
               fill='currentColor'
               className='bi bi-search search__icon'
               viewBox='0 0 16 16'
-              style={lang === 'en' ? { right: '3%' } : { left: '3%' }}
+              style={lang === 'en' ? { right: '4%' } : { left: '4%' }}
             >
               <path d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z' />
             </svg>
@@ -47,6 +53,7 @@ const Search = ({ props }) => {
           className='categories'
           navigation
           autoplay={{ delay: 3000 }}
+          ref={swiperRef}
           style={{ direction: 'rtl' }}
           breakpoints={{
             // when window width is >= 750px

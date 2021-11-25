@@ -1,11 +1,12 @@
 import './recipeDetails.css'
 import { data } from '../../../data/data'
 import { useModal } from 'react-hooks-use-modal'
+import { useState } from 'react'
 
 function RecipeDetails(props) {
   // Get recipe id from route
   let recipeId = props.match.params.id
-  console.log(recipeId)
+  // console.log(recipeId)
 
   // Find the recipe from data by id
   let recipeDetails = data.find(({ id }) => {
@@ -18,7 +19,20 @@ function RecipeDetails(props) {
     closeOnOverlayClick: true,
   })
 
-  console.log(recipeDetails) // return selected recipe
+  const [reviewMsg, setReviewMsg] = useState('')
+  const [reviewImg, setReviewImg] = useState()
+  const [isFilePicked, setIsFilePicked] = useState(false)
+
+  const fileReader = new FileReader()
+
+  // Handle Submit
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(reviewMsg)
+    console.log(reviewImg)
+  }
+
+  // console.log(recipeDetails) // return selected recipe
   return (
     <>
       <main className='recipeInfo__container'>
@@ -150,24 +164,54 @@ function RecipeDetails(props) {
                       <i class='bx bx-x'></i>
                     </button>
                   </div>
-                  <div className='modal__body'>
+                  <form className='modal__body' onSubmit={handleSubmit}>
                     <h4 className='modal__title'>{recipeDetails.title}</h4>
                     <div className='modal__content'>
-                      <textarea
+                      <textarea /* TODO Convert input to textarea */
                         type='text'
+                        // rows='10'
+                        // cols='50'
+                        required
+                        value={reviewMsg}
+                        onChange={(e) => setReviewMsg(e.target.value)}
                         placeholder='What did you think about the recipe'
                         className='modal__input__message'
                       />
-                      <input
-                        type='file'
-                        className='modal__input__img'
-                        alt='Add Pic'
-                      />
+                      <label htmlFor='modal-img' className='modal__label__img'>
+                        <i class='bx bxs-camera'></i>
+                        <input
+                          id='modal-img'
+                          type='file'
+                          className='modal__input__img'
+                          alt='Add Pic'
+                          // value={reviewImg}
+                          onChange={(e) => {
+                            setReviewImg(URL.createObjectURL(e.target.files[0]))
+                            setIsFilePicked(true)
+                          }}
+                        />
+                        {isFilePicked ? (
+                          <div>
+                            {/* <img
+                              src='https://placebear.com/200/200'
+                              alt='...'
+                            /> */}
+                            <img
+                              src={reviewImg && reviewImg}
+                              alt=''
+                              className='modal__user__img'
+                            />
+                          </div>
+                        ) : (
+                          <p>Select a file to show details</p>
+                        )}
+                        Add Photo
+                      </label>
                     </div>
                     <button type='submit' className='modal__submit__btn'>
                       Submit
                     </button>
-                  </div>
+                  </form>
                 </div>
               </Modal>
               <div className='reviews__box__section'>

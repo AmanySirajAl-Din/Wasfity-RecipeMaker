@@ -40,7 +40,7 @@
 .meal__img,
 .hero__main-img,
 .pop-meal-img {
-  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 1px rgba(0,0,0,.1),0 2px 4px rgba(0,0,0,.02);;
   border-radius: 20px;
 }
 .hero__main h3 {

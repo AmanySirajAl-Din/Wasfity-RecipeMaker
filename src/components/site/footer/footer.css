@@ -29,12 +29,15 @@ footer {
 .up__section,
 .down__section {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 3% 0;
   margin: 5px;
   width: 80%;
   flex-wrap: wrap;
+}
+.down__section p {
+  color: #575a70;
 }
 
 .up__section ul,
@@ -46,7 +49,7 @@ footer {
 
 .up__section h1,
 .down__section h1 {
-  color: #9697a0;
+  color: #e8eafc;
   font-size: 20px;
   font-family: 'Poppins', sans-serif;
 }
@@ -112,7 +115,6 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
   }
   .footer__search h1 {
     margin: 20px;

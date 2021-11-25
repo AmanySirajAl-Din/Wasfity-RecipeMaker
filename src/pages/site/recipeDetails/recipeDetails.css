@@ -133,3 +133,76 @@
 .recipeInfo__right {
   flex: 1;
 }
+
+/* Reviews */
+.reviews {
+  padding: 3rem 0;
+}
+.reviews__box {
+  padding: 1rem;
+  border: 1px solid #333;
+  background: #ddd;
+}
+.reviews__box__btn {
+  padding: 1rem;
+}
+.reviews__box__btn button {
+  border: none;
+  outline: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: 20px;
+  background: #ad6253;
+  color: #ddd;
+}
+.reviews__box__section {
+  border-top: 2px solid #333;
+}
+.review {
+  padding: 1rem 0;
+}
+
+/* Reviews Modal */
+.review__modal {
+  width: 50%;
+}
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #6a1a21;
+  color: #ddd;
+  padding: 0.5rem;
+}
+.modal__text {
+  margin: 0;
+}
+.modal__close__btn i {
+  color: #ddd;
+}
+.modal__body {
+  background-color: #ddd;
+  padding: 2rem 1rem;
+}
+.modal__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+}
+.modal__input__message {
+  flex: 1;
+}
+.modal__input__img {
+  flex: 1;
+}
+
+.modal__submit__btn {
+  width: 100%;
+  text-align: center;
+  padding: 0.7rem 1.2rem;
+  background-color: #6a1a21;
+  color: #ddd;
+  border: none;
+  outline: none;
+}

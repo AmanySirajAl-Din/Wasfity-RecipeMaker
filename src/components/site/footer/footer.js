@@ -45,7 +45,9 @@ const Footer = ({ intl: { messages } }) => {
             <a href={url}>{about.services}</a>
           </li>
         </ul>
+      </div>
 
+      <div className='down__section'>
         <ul>
           <h1>{contact.contact}</h1>
           <li>
@@ -63,10 +65,7 @@ const Footer = ({ intl: { messages } }) => {
             <p>{contact.map}</p>
           </li>
         </ul>
-      </div>
-
-      <div className='down__section'>
-        <ul>
+        {/* <ul>
           <h1>{privacy.privacyPolicy}</h1>
           <li>
             <a href={url}>{privacy.teamsOfService}</a>
@@ -96,7 +95,7 @@ const Footer = ({ intl: { messages } }) => {
           <li>
             <a href={url}>{more.feedback}</a>
           </li>
-        </ul>
+        </ul> */}
 
         <div className='social'>
           <h1>{other.social}</h1>

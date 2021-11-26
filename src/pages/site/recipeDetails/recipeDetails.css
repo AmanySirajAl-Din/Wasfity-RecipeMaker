@@ -1,8 +1,10 @@
+/*---------------- Layout */
 .recipeInfo__container {
   display: grid;
   place-items: center;
 }
 
+/*------------------ Main */
 .recipeInfo {
   display: flex;
   flex-direction: column;
@@ -22,6 +24,9 @@
   gap: 1rem;
   margin-bottom: 0.5rem;
 }
+.recipeInfo__numReview {
+  color: var(--dark-clr);
+}
 .recipeInfo__description {
   font-size: 1.2rem;
   margin-bottom: 0.2rem;
@@ -38,13 +43,13 @@
   gap: 0.3rem;
 }
 .recipeInfo__category {
-  color: #6a1a21;
+  color: var(--dark-clr, #333);
   font-weight: bolder;
-  border-bottom: 2px solid rgb(248, 171, 21);
+  border-bottom: 2px solid var(--main-clr, #f8ab15);
   width: fit-content;
 }
 
-/* Left Part */
+/*------------------------- Left Part */
 .recipeInfo__left {
   width: 50%;
   display: flex;
@@ -122,7 +127,6 @@
 
 .recipeInfo__content {
   flex: 1;
-  /* padding: 4rem 2rem; */
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -140,8 +144,8 @@
 }
 .reviews__box {
   padding: 1rem;
-  border: 1px solid #333;
-  background: #ddd;
+  border: 1px solid var(--dark-clr, #333);
+  background: var(--lightGray-clr, #ccc);
 }
 .reviews__box__btn {
   padding: 1rem;
@@ -151,11 +155,11 @@
   outline: none;
   padding: 0.7rem 1.4rem;
   border-radius: 20px;
-  background: #ad6253;
-  color: #ddd;
+  background: var(--main-clr, #f8ab15);
+  color: var(--dark-clr, #333);
 }
 .reviews__box__section {
-  border-top: 2px solid #333;
+  border-top: 2px solid var(--dark-clr, #333);
 }
 .review {
   padding: 1rem 0;
@@ -171,18 +175,18 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  background-color: #6a1a21;
-  color: #ddd;
+  background-color: var(--main-clr, #f8ab15);
+  color: var(--dark-clr, #333);
   padding: 0.5rem;
 }
 .modal__text {
   margin: 0;
 }
 .modal__close__btn i {
-  color: #ddd;
+  color: var(--dark-clr, #333);
 }
 .modal__body {
-  background-color: #ddd;
+  background-color: var(--white-clr, #fff);
   padding: 2rem;
 }
 .modal__content {
@@ -207,7 +211,7 @@
 .modal__label__img {
   position: relative;
   flex: 1;
-  border: 1px solid #6a1a21;
+  border: 1px solid var(--main-clr, #f8ab15);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -221,7 +225,7 @@
   padding: 1rem;
   font-size: 6rem;
   border-radius: 50%;
-  border: 1px solid #6a1a21;
+  border: 1px solid var(--main-clr, #f8ab15);
 }
 /* When User Upload img */
 .modal__user__img {
@@ -236,8 +240,8 @@
   width: 100%;
   text-align: center;
   padding: 0.7rem 1.2rem;
-  background-color: #6a1a21;
-  color: #ddd;
+  background-color: var(--main-clr, #f8ab15);
+  color: var(--dark-clr, #333);
   border: none;
   outline: none;
 }

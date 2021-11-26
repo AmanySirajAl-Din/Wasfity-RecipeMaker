@@ -1,15 +1,15 @@
 .one-recipe {
-  border: 1px solid #ccc;
+  border: 1px solid var(--lightGray-clr, #ccc);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  color: #333;
-  background-color: #fff;
+  color: var(--dark-clr, #333);
+  background-color: var(--white-clr, #fff);
   transition: 0.3s;
   border-radius: 20px;
 }
 .one-recipe:hover {
-  box-shadow: 0 8px 32px hsla(0, 0%, 10%, 0.1);
+  box-shadow: var(--recipe-shadow, 0 8px 32px hsla(0, 0%, 10%, 0.1));
 }
 
 .one-recipe__img {
@@ -32,7 +32,7 @@
 }
 
 .one-recipe__category {
-  color: #f8ab15;
+  color: var(--main-clr, #f8ab15);
 }
 
 .one-recipe__data {

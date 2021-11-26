@@ -1,5 +1,19 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
+/*----------------------- VARIABLES  */
+:root {
+  /* Colors */
+  --main-clr: #f8ab15;
+  --white-clr: #fff;
+  --dark-clr: #333;
+  --lightGray-clr: #ccc;
+
+  /* Shadow */
+  --header-shadow: 2px 4px 5px rgba(0, 0, 0, 0.2);
+  --recipe-shadow: 0 8px 32px hsla(0, 0%, 10%, 0.1);
+  --hero-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

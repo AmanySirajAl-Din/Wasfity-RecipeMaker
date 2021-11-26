@@ -1,7 +1,7 @@
-import './recipeDetails.css'
-import { data } from '../../../data/data'
 import { useModal } from 'react-hooks-use-modal'
 import { useState } from 'react'
+import { data } from '../../../data/data'
+import './recipeDetails.css'
 
 function RecipeDetails(props) {
   // Get recipe id from route
@@ -14,7 +14,7 @@ function RecipeDetails(props) {
   })
 
   // Modal
-  const [Modal, open, close, isOpen] = useModal('root', {
+  const [Modal, open, close] = useModal('root', {
     preventScroll: true,
     closeOnOverlayClick: true,
   })
@@ -23,13 +23,15 @@ function RecipeDetails(props) {
   const [reviewImg, setReviewImg] = useState()
   const [isFilePicked, setIsFilePicked] = useState(false)
 
-  const fileReader = new FileReader()
-
   // Handle Submit
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(reviewMsg)
     console.log(reviewImg)
+    setReviewMsg('')
+    setReviewImg(
+      'https:////via.placeholder.com//400.png?text=tap+to+add+another+photo'
+    )
   }
 
   // console.log(recipeDetails) // return selected recipe
@@ -43,20 +45,28 @@ function RecipeDetails(props) {
             <div className='recipeInfo__data'>
               {/* --------------------- Recipe Data  */}
               <small className='recipeInfo__reviews'>
-                <a href='#reviews'>
-                  <i
-                    class='bx bx-star'
-                    style={{ color: 'rgb(248, 171, 21)' }}
-                  ></i>
-                  2reviews {/* Number of reviews */}
+                <a href='#reviews' className='recipeInfo__numReview'>
+                  <span className='recipeInfo__category'>
+                    <i
+                      class='bx bx-star'
+                      style={{ color: 'rgb(248, 171, 21)' }}
+                    ></i>{' '}
+                    (2) reviews {/* Number of reviews */}
+                  </span>
                 </a>
               </small>
               <small className='recipeInfo__time'>
-                <i class='bx bx-time-five'></i>
-                {recipeDetails.time.slice(0, -1)}
+                Duration:
+                <span className='recipeInfo__category'>
+                  <i class='bx bx-time-five'></i>{' '}
+                  {recipeDetails.time.slice(0, -1)}
+                </span>
               </small>
               <small className='recipeInfo__difficulty'>
-                {recipeDetails.difficulty.toLocaleUpperCase()}
+                Difficulty:{' '}
+                <span className='recipeInfo__category'>
+                  {recipeDetails.difficulty.toLocaleUpperCase()}
+                </span>
               </small>
             </div>
             {/* ----------------------- Recipe Description  */}
@@ -151,7 +161,6 @@ function RecipeDetails(props) {
             <div className='reviews__box'>
               <div className='reviews__box__btn'>
                 <button onClick={open}>Add Rating Review</button>
-                <p>Modal is Open? {isOpen ? 'Yes' : 'No'}</p>
               </div>
               {/* ------------------------- Review Modal  */}
               <Modal className='review__modal'>
@@ -167,10 +176,8 @@ function RecipeDetails(props) {
                   <form className='modal__body' onSubmit={handleSubmit}>
                     <h4 className='modal__title'>{recipeDetails.title}</h4>
                     <div className='modal__content'>
-                      <textarea /* TODO Convert input to textarea */
+                      <textarea
                         type='text'
-                        // rows='10'
-                        // cols='50'
                         required
                         value={reviewMsg}
                         onChange={(e) => setReviewMsg(e.target.value)}
@@ -190,20 +197,14 @@ function RecipeDetails(props) {
                             setIsFilePicked(true)
                           }}
                         />
-                        {isFilePicked ? (
+                        {isFilePicked && (
                           <div>
-                            {/* <img
-                              src='https://placebear.com/200/200'
-                              alt='...'
-                            /> */}
                             <img
                               src={reviewImg && reviewImg}
                               alt=''
                               className='modal__user__img'
                             />
                           </div>
-                        ) : (
-                          <p>Select a file to show details</p>
                         )}
                         Add Photo
                       </label>

@@ -16,6 +16,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  cursor: pointer;
 }
 .meal__title {
   text-align: left;
@@ -29,6 +30,25 @@
   flex-direction: column;
   gap: 0.5rem;
   text-align: left;
+  width: 100%;
+}
+.hero__slide {
+  padding: 0 1rem;
+  justify-content: initial;
+  cursor: pointer;
+}
+.meal__img,
+.hero__main-img,
+.pop-meal-img {
+  box-shadow: var(
+    --hero-shadow,
+    0 0 1px rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.02)
+  );
+  border-radius: 20px;
+}
+.hero__main h3 {
+  margin: 0.5rem 0;
 }
 
 /* Right hero */
@@ -39,6 +59,8 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  height: fit-content;
+  border-radius: 20px;
 }
 .hero__popular-meals {
   display: flex;
@@ -49,6 +71,7 @@
   display: flex;
   gap: 0.5rem;
   text-align: left;
+  cursor: pointer;
 }
 
 /* Mediam Screens */

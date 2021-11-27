@@ -32,6 +32,7 @@ function RecipeDetails(props) {
     setReviewImg(
       'https:////via.placeholder.com//400.png?text=tap+to+add+another+photo'
     )
+    close()
   }
 
   // console.log(recipeDetails) // return selected recipe

@@ -162,8 +162,9 @@ export default function Sidbar() {
             <Link to="Ingredients">Ingredients</Link>
           </li>
           <li>
-            <Link to="AddIngredients">Add Ingredient</Link>
+            <Link to="AddIngred">Add Ingredient</Link>
           </li>
+         
         </li>
       
       </ul>

@@ -2,69 +2,59 @@ import React from "react";
 import "./Ingredients.css";
 import { useEffect, useState } from "react";
 import { db } from "../../../../firebase";
-import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 import {
   collection,
   onSnapshot,
-  addDoc 
-  
+  addDoc,
+  getDocs,
+  where,
+  query,
 } from "firebase/firestore";
 
-export default function EditIngredients() {
-  const history = useHistory();
-  const [Category_of_ingredients, setCatingred] = useState([]);
-  const [ingredientName, setIngredientName] = useState("");
-  const [categoryId, setCategoryId] = useState("");
+
+export default function AddIngred() {
 
   
+  const history = useHistory();
+  const [Category_of_ingredients, setCatIngred] = useState([]);
+  const [ingredientName, setIngredientName] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  var [index, setIndex] = useState(0);
+
   useEffect(
     () =>
       onSnapshot(collection(db, "Categories_for_ingredients"), (snapshot) =>
-      setCatingred(snapshot.docs.map((doc) =>({...doc.data(),id:doc.id}) ))
+        setCatIngred(
+          snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        )
       ),
     []
   );
 
-  // async function editAllServicesFields(collectionName, documentId,{serviceDescripition,serviceName,servicePhone,servicePrice, offerd , offerRatio, imagePath, brandName}){
-  //   const alyDocRef = doc(db, collectionName, documentId);
-  //   await updateDoc(alyDocRef, { 
-  //       serviceDescripition: serviceDescripition,
-  //       serviceName: serviceName,
-  //       servicePhone:servicePhone,
-  //       servicePrice: servicePrice,
-  //       offerd:offerd,
-  //       brandName:brandName,
-  //       offerRatio:offerRatio,
-  //       createdAt: new Date(),
-  //       createdBy: auth.currentUser.email,
-  //       imagePath: imagePath
-
-  //   });
-
-  
-  const editHandel = (e) => {
+  const AddHandel = (e) => {
     e.preventDefault();
-        const docRef = doc(db, "Ingredients", id);
-        const payload = {
-            ingName:ingredientName,
-            categoryId:categoryId
-        };
-       setDoc(docRef, payload)
+    //  console.log("add")
+    index=index+1;
+    setIndex(index);
+    addDoc(collection(db, "Ingredients"), {
+      ingName: ingredientName,
+      categoryId: categoryId,
+      index:index,
+    })
       .then(() => {
         alert("ingredient Added successefuly thum");
-        return  history.push("/Ingredients")
+        return history.push("Dashboard/Ingredients");
       })
       .catch((error) => {
         alert(error.message);
       });
     setIngredientName("");
-    setCategoryId("اختر التصنيف");
   };
   return (
     <div className=" add-ingredient ">
-      <form className="form add-ingredient" onSubmit={editHandel}>
+      <form className="form add-ingredient" onSubmit={AddHandel}>
         <div className="mt-4 p-5" dir="rtl">
           <h1 className="text-center text-black">اضافة مكون</h1>
           <div className="form-group text-right">
@@ -95,39 +85,36 @@ export default function EditIngredients() {
             />
           </div>
           <div className="form-group text-right">
-            <label for="categoryId" className="form-label">
+            <label for="FacultyAdress" className="form-label">
               التصنيف{" "}
             </label>
-            
+
             <select
               className="form-select form-control"
-              
-              id="categoryId"
+              id="FacultyAdress"
               value={categoryId}
+              onChange={(e) => {
+                setCategoryId(e.target.value);
+                let value = e.target.value;
+                console.log(value);
 
-              onChange={(e) =>{
-                setCategoryId(e.target.value)
-                console.log(e.target.value)
-      
-        //  let value = Array.from(e.target.selectedOptions, option => option.value);
-        //  console.log(value);
-        // setCategoryId(value);
-  
-
-            } }
-        >
+                //  let value = Array.from(e.target.selectedOptions, option => option.value);
+                //  console.log(value);
+                // setCategoryId(value);
+              }}
+            >
               {Category_of_ingredients.map((Category_of_ingredient) => {
-              return (
-              <option value={Category_of_ingredient.id}> {Category_of_ingredient.ingCatName} </option>
-              );
-            })}
+                return (
+                  <option value={Category_of_ingredient.id}>
+                    {" "}
+                    {Category_of_ingredient.ingCatName}{" "}
+                  </option>
+                );
+              })}
             </select>
           </div>
-          
-          <button  className="btn btn-dark">
-           حفظ
-          </button>
-          
+
+          <button className="btn btn-dark">اضف</button>
         </div>
       </form>
     </div>

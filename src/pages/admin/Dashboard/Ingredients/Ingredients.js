@@ -46,7 +46,7 @@ export default function Ingredients() {
   // };
   
 
-  const deleteRecipe = async (id) => {
+  const deleteIngerd= async (id) => {
     const docRef = doc(db, "Ingredients", id);
      await deleteDoc(docRef);
      console.log(  deleteDoc(docRef).id)
@@ -58,7 +58,7 @@ export default function Ingredients() {
         <div class="container-fluid">
           <a class="navbar-brand heading-word ">Ingredients</a>
           <div class="d-flex">
-            <Link to="AddIngredients">
+            <Link to="/AddIngredients">
               <button class="btn btn-outline-warning" >
                 Add
               </button>
@@ -74,7 +74,6 @@ export default function Ingredients() {
           <tr>
             <th scope="col">id</th>
             <th scope="col">Name</th>
-            <th scope="col">Category</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
           </tr>
@@ -94,7 +93,7 @@ export default function Ingredients() {
                   <button >Edit</button>
                   </Link>
                 </td>
-                <td><button onClick={()=>deleteRecipe(Ingredient.id)}>Delete</button></td>
+                <td><button onClick={()=>deleteIngerd(Ingredient.id)}>Delete</button></td>
               </tr>
             );
           })}

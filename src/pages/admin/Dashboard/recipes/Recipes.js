@@ -93,10 +93,7 @@ export default function Recipes() {
                   </ul>
                 </td>
                 <td>{recipe.DegreeOfDifficulty}</td>
-                <td>{recipe.DegreeOfDifficulty}</td>
-                <td>{recipe.DegreeOfDifficulty}</td>
-                <td>{recipe.DegreeOfDifficulty}</td>
-                <td>{recipe.DegreeOfDifficulty}</td>
+                
                 <td>
                   <img
                     src={recipe.imagePath}

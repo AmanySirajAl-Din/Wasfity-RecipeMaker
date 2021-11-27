@@ -19,6 +19,8 @@ import Ingredients from "../../../pages/admin/Dashboard/Ingredients/Ingredients"
 import AddIngredients from "../../../pages/admin/Dashboard/Ingredients/AddIngredients";
 import NavAdmin from "../../../components/admin/navAdmin/NavAdmin";
 import User from './../../../pages/admin/Dashboard/users/User'
+import EditIngredCat from '../../../pages/admin/Dashboard/Categories_for_ingredients/EditIngredCat'
+import AddIngred from '../../../pages/admin/Dashboard/Ingredients/AddIngred'
 
 
 function Dashboard() {
@@ -43,10 +45,14 @@ function Dashboard() {
                 <Route exact path={`${path}IC`} component={Category_of_ingredients}></Route>
                 <Route exact path={`${path}AddIngredCat`} component={AddIngredCat}></Route>
                 <Route exact path={`${path}Ingredients`} component={Ingredients}></Route>
-                <Route exact path={`${path}AddIngredients`} component={AddIngredients}></Route>
+                <Route exact path={`${path}AddIngred`} component={AddIngred}></Route>
+               
                 <Route exact path={`${path}Users`} component={User}></Route>
+                {/* <Route exact path={`${path}EditIngredients`} component={EditIngredients}></Route> */}
+                <Route exact path={`${path}EditIngredCat`} component={EditIngredCat}></Route>
+               
               
-                
+              
               </Switch>
             </div>
       

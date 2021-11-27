@@ -12,9 +12,11 @@ import {
   where,
   query,
 } from "firebase/firestore";
-import { isDoExpression } from "@babel/types";
+
 
 export default function AddIngredients() {
+
+  
   const history = useHistory();
   const [Category_of_ingredients, setCatIngred] = useState([]);
   const [ingredientName, setIngredientName] = useState("");

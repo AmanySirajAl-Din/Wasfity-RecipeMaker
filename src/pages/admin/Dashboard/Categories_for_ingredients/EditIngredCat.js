@@ -1,134 +1,73 @@
-import React from "react";
-import "./Ingredients.css";
-import { useEffect, useState } from "react";
-import { db } from "../../../../firebase";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import React from 'react'
+import { db, app } from '../../../../firebase'
+import { useState } from 'react'
+import { collection, addDoc } from 'firebase/firestore'
+import './Categories_for_ingredients.css'
+import { useHistory } from 'react-router-dom'
+import { getStorage, ref as storageRef, uploadBytes } from 'firebase/storage'
 
-import {
-  collection,
-  onSnapshot,
-  addDoc 
-  
-} from "firebase/firestore";
+export default function EditaIngredCat() {
+  const [ingerdCatName, setIngredCatName] = useState('')
+  const history = useHistory()
 
-export default function AddIngredients() {
-  const history = useHistory();
-  const [Category_of_ingredients, setCatingred] = useState([]);
-  const [ingredientName, setIngredientName] = useState("");
-  const [categoryId, setCategoryId] = useState("");
+  const AddIngredCatHandel = (e) => {
+    e.preventDefault()
 
-  
-  useEffect(
-    () =>
-      onSnapshot(collection(db, "Categories_for_ingredients"), (snapshot) =>
-      setCatingred(snapshot.docs.map((doc) =>({...doc.data(),id:doc.id}) ))
-      ),
-    []
-  );
-
-  // async function editAllServicesFields(collectionName, documentId,{serviceDescripition,serviceName,servicePhone,servicePrice, offerd , offerRatio, imagePath, brandName}){
-  //   const alyDocRef = doc(db, collectionName, documentId);
-  //   await updateDoc(alyDocRef, { 
-  //       serviceDescripition: serviceDescripition,
-  //       serviceName: serviceName,
-  //       servicePhone:servicePhone,
-  //       servicePrice: servicePrice,
-  //       offerd:offerd,
-  //       brandName:brandName,
-  //       offerRatio:offerRatio,
-  //       createdAt: new Date(),
-  //       createdBy: auth.currentUser.email,
-  //       imagePath: imagePath
-
-  //   });
-}
-  
-  const editHandel = (e) => {
-    e.preventDefault();
-        const docRef = doc(db, "Ingredients", id);
-        const payload = {
-            ingName:ingredientName,
-            categoryId:categoryId
-        };
-       setDoc(docRef, payload)
+    addDoc(collection(db, 'Categories_for_ingredients'), {
+      ingCatName: ingerdCatName,
+    })
       .then(() => {
-        alert("ingredient Added successefuly thum");
-        return  history.push("/Ingredients")
+        // setError("");
+
+        alert('Recipe Added successefuly 👍')
+        return history.push('Dashboard/IC')
       })
       .catch((error) => {
-        alert(error.message);
-      });
-    setIngredientName("");
-  };
+        alert(error.message)
+      })
+
+    // setRecipeCatName("")
+  }
   return (
-    <div className=" add-ingredient ">
-      <form className="form add-ingredient" onSubmit={editHandel}>
-        <div className="mt-4 p-5" dir="rtl">
-          <h1 className="text-center text-black">اضافة مكون</h1>
-          <div className="form-group text-right">
-            <label for="studentId" className="form-label">
+    <div className=' add-category'>
+      <form className='form' onSubmit={AddIngredCatHandel}>
+        <div className='mt-4 p-5' dir='rtl'>
+          <h1 className='text-center text-black'>اضافة قسم</h1>
+          <div className='form-group text-right'>
+            <label htmlFor='recipeCatId' className='form-label'>
               ID
             </label>
             <input
-              type="text"
-              className="form-control"
-              id="ingredientId"
-              placeholder="ID"
-              readonly
+              type='text'
+              className='form-control'
+              id='recipeCatId'
+              placeholder='ID'
+              readOnly
             />
           </div>
 
-          <div className="form-group text-right">
-            <label for="ingredientName" className="form-label ">
-              {" "}
-              اسم المكون
+          <div className='form-group text-right'>
+            <label htmlFor='recipeName' className='form-label '>
+              اسم القسم
             </label>
             <input
-              type="text"
-              className="form-control"
-              id="categoryName"
-              value={ingredientName}
-              onChange={(e) => setIngredientName(e.target.value)}
-              placeholder=" اسم المكون "
+              type='text'
+              className='form-control'
+              id='recipeCatName'
+              value={ingerdCatName}
+              onChange={(e) => setIngredCatName(e.target.value)}
+              placeholder=' اسم القسم  '
             />
           </div>
-          <div className="form-group text-right">
-            <label for="FacultyAdress" className="form-label">
-              التصنيف{" "}
-            </label>
-            
-            <select
-              className="form-select form-control"
-              
-              id="FacultyAdress"
-              value={categoryId}
-
-              onChange={(e) =>{
-                setCategoryId(e.target.value)
-                console.log(e.target.value)
-      
-        //  let value = Array.from(e.target.selectedOptions, option => option.value);
-        //  console.log(value);
-        // setCategoryId(value);
-  
-
-            } }
-        >
-              {Category_of_ingredients.map((Category_of_ingredient) => {
-              return (
-              <option value={Category_of_ingredient.id}> {Category_of_ingredient.ingCatName} </option>
-              );
-            })}
-            </select>
+          <div>
+            {/* <Link to="RC"> */}
+            <button type='button ' className='btn btn-dark  my-4'>
+              اضف
+            </button>
+            {/* </Link> */}
           </div>
-          
-          <button  className="btn btn-dark">
-           حفظ
-          </button>
-          
         </div>
       </form>
     </div>
-  );
+  )
 }

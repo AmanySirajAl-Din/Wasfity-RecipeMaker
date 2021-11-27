@@ -23,6 +23,16 @@ export default function Categories_for_ingredients() {
       ),
     []
   );
+//   async function getSingleService(collection, id){
+//     const docRef = doc(db,collection , id);
+//     const docSnap = await getDoc(docRef);
+//     if (docSnap.exists()) {
+//       return docSnap.data()
+//     } else {
+//      return  console.log("No such document!");
+//     }
+  
+// }
 
   const editRecipe = async (id) => {
     const docRef = doc(db, "Categories_for_ingredients", id);
@@ -52,7 +62,7 @@ export default function Categories_for_ingredients() {
         <div class="container-fluid">
           <a class="navbar-brand heading-word ">Category_of_ingredients</a>
           <div class="d-flex">
-            <Link to="AddIngredCat">
+            <Link to="/addIngredientCat">
               <button class="btn btn-outline-warning" >
                 Add
               </button>
@@ -80,7 +90,11 @@ export default function Categories_for_ingredients() {
                   1
                 </th>
                 <td>{Category_of_ingredient.ingCatName}</td>
-                <td><button onClick={()=>editRecipe(Category_of_ingredient.id)}>Edit</button></td>
+                <Link to={`/Dashboard/EditIngredCat?id=${Category_of_ingredient.id}`}>
+                <td><button >Edit</button></td>
+                  
+                   </Link>
+                
                 <td><button onClick={()=>deleteRecipe(Category_of_ingredient.id)}>Delete</button></td>
               </tr>
             );

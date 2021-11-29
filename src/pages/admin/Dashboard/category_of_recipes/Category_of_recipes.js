@@ -82,6 +82,12 @@ export default function Category_of_recipes() {
                   1
                 </th>
                 <td>{Category_of_recipe.Name}</td>
+                <td><img
+                    src={Category_of_recipe.imagePath}
+                    alt='...'
+                    width='100'
+                    height='100'
+                  /></td>
                 <td><button onClick={()=>editRecipe(Category_of_recipe.id)}>Edit</button></td>
                 <td><button onClick={()=>deleteRecipe(Category_of_recipe.id)}>Delete</button></td>
               </tr>

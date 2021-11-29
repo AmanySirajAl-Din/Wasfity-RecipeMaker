@@ -58,7 +58,7 @@ export default function Ingredients() {
         <div class="container-fluid">
           <a class="navbar-brand heading-word ">Ingredients</a>
           <div class="d-flex">
-            <Link to="/AddIngredients">
+            <Link to="/Dashboard/AddIngred">
               <button class="btn btn-outline-warning" >
                 Add
               </button>

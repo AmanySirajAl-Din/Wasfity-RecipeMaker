@@ -42,6 +42,7 @@ export default function AddIngred() {
       ingName: ingredientName,
       categoryId: categoryId,
       index:index,
+      createdAt: new Date(),
     })
       .then(() => {
         alert("ingredient Added successefuly thum");

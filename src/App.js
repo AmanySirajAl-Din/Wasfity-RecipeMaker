@@ -21,7 +21,7 @@ function App() {
                 <Switch>
                 <UserRout exact path="/Dashboard/*" component={Dashboard} />
                   <Route exact path='/Loader' component={Loader}></Route>
-                  <Route exact path="/login" component={Login} /> 
+                  <Route exact path="/" component={Login} /> 
                    <Route exact path="/register" component={Signup} /> 
 
                 </Switch>

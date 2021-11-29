@@ -179,7 +179,8 @@ export default function AddRecipe(props) {
       DegreeOfDifficulty: DegreeOfDifficulty,
       imagePath: url,
       personNum: personNum,
-      recipePreperTime:recipePreperTime
+      recipePreperTime:recipePreperTime,
+      createdAt: new Date(),
     })
       .then((data) => {
         console.log(data.id);

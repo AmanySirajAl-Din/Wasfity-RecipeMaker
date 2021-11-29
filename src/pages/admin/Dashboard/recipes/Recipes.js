@@ -73,7 +73,6 @@ export default function Recipes() {
             <th scope='col'>وقت الطهي</th>
             <th scope='col'>التقييم</th>
             <th scope='col'>الصورة</th>
-            <th scope='col'>الفيديو</th>
           </tr>
         </thead>
         <tbody>

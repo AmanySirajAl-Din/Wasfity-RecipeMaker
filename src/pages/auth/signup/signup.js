@@ -23,9 +23,7 @@ function Signup() {
     password: "",
     confirmPass: "",
   });
-  const[displayName,setDisplayname]=useState("")
-  const[email,setEmail]=useState("")
-  const[password,setPassword]=useState("")
+  
   const[user,setUser]=useState("")
   
 

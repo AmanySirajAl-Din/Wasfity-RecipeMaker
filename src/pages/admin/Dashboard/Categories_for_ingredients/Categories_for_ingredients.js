@@ -23,33 +23,10 @@ export default function Categories_for_ingredients() {
       ),
     []
   );
-//   async function getSingleService(collection, id){
-//     const docRef = doc(db,collection , id);
-//     const docSnap = await getDoc(docRef);
-//     if (docSnap.exists()) {
-//       return docSnap.data()
-//     } else {
-//      return  console.log("No such document!");
-//     }
-  
-// }
 
-  const editRecipe = async (id) => {
-    const docRef = doc(db, "Categories_for_ingredients", id);
-    const payload = {
-      Name: "عنب",
-    };
-     await setDoc(docRef, payload);
-     console.log(  setDoc(docRef, payload).id)
-  };
-  const addRecipe = async () => {
-    const collectionRef = collection(db, "Categories_for_ingredients");
-    const payload = {
-      Name: "غداء",
-     
-    };
-    await addDoc(collectionRef, payload);
-  };
+
+  
+  
   const deleteRecipe = async (id) => {
     const docRef = doc(db, "Categories_for_ingredients", id);
      await deleteDoc(docRef);

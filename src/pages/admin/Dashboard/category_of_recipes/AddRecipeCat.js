@@ -1,9 +1,18 @@
 import React from "react";
-import { db } from "../../../../firebase";
 import { useState } from "react";
+import { db, app } from "../../../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { Link, useHistory } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
+
+import {
+  getStorage,
+  ref as storageRef,
+  getDownloadURL,
+  uploadBytesResumable,
+} from "firebase/storage";
+// firestore configration 
+
 
 
 
@@ -11,36 +20,21 @@ export default function AddRecipeCat(props) {
   const [recipeCatName, setRecipeCatName] = useState("");
   const [quant, setQuant] = useState("");
   const history = useHistory();
-  const [components, setComponents] = useState(["First Ingredient"]); 
-  const [componentNames, setComponentNames] = useState([  'second gredient', 'Third Ingredient', 'Fourth Ingredient', 'Saturn', 'Uranus', 'Neptune' ]); 
+  const [image, setImage] = useState(null);
+  const [progress, setProgress] = useState(0);
+  const [url, setUrl] = useState("");
+  const [loading, setLoading] = useState(true);
   
 
 
-  function addComponent(e) { 
-    
-    e.preventDefault();
-    // setComponents([...components, "Sample Component"]) 
-    if (componentNames.length > 0) { 
-      
-      setComponents([...components, componentNames[0]]);
-      componentNames.splice(0, 1);
-      
-    } else { 
-      
-      window.alert("No more planets to add!");
-      
-    } 
-    
-    
-  } 
-
-  
 
   const AddRecpCatHandel = (e) => {
     e.preventDefault();
 
     addDoc(collection(db, "Category_of_recipes"), {
       Name: recipeCatName,
+      imagePath: url,
+      createdAt: new Date(),
     })
       .then((data) => {
         alert("Recipe Added successefuly 👍");
@@ -51,7 +45,53 @@ export default function AddRecipeCat(props) {
       });
 
     // setRecipeCatName("")
-  };
+    }
+
+    function handelChange(e) {
+      if (
+        (e.target.files[0],
+        "name",
+        {
+          writable: true,
+          value: new Date(),
+        })
+      )
+        setImage(e.target.files[0]);
+    }
+
+    async function handelUpload(e) {
+      e.preventDefault();
+  
+      const storage = getStorage(app);
+      const storageReff = storageRef(storage);
+      const imagesRef = storageRef(storageReff, `images/${image.name}`);
+      const uploadTask = uploadBytesResumable(imagesRef, image);
+  
+      console.log(uploadTask);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const prog = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(prog);
+        },
+        (error) => console.log(error),
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log("file available at ", downloadURL);
+            setUrl(downloadURL);
+          });
+        }
+      );
+  
+      console.log(url);
+    };
+  
+  
+
+
+
   return (
     <div className=" add-category">
       <form className="form" onSubmit={AddRecpCatHandel}>
@@ -82,7 +122,36 @@ export default function AddRecipeCat(props) {
               value={recipeCatName}
               onChange={(e) => setRecipeCatName(e.target.value)}
               placeholder=" اسم القسم  "
+              required
             />
+          </div>
+          <div className="my-4 bg-light p-3">
+            <label className="text-primary font-weight-bold mb-2">
+            {loading && (
+              <label>
+                <img
+                  src={url || "http://via.placeholder.com/100"}
+                  alt="firebase-image"
+                  width="100"
+                  height="100"
+                />
+                <div> Recipe Imege</div>
+                
+                <progress value={progress} max="100" />
+              </label>
+            )}
+            </label>
+            <input
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              required
+              onChange={handelChange}
+            />
+           
+
+            <button className="btn-upload-gradiant" onClick={handelUpload}>
+              Upload
+            </button>
           </div>
          
         

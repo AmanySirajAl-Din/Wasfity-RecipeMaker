@@ -18,7 +18,7 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage'
 // firestore configration
-import { db, app } from '../../../firebase'
+import { db, app } from '../../../../firebase'
 
 export default function AddRecipe(props) {
   const [recipeId, setRecipeId] = useState('')
@@ -179,6 +179,7 @@ export default function AddRecipe(props) {
       imagePath: url,
       personNum: personNum,
       recipePreperTime: recipePreperTime,
+      createdAt: new Date(),
     })
       .then((data) => {
         console.log(data.id)
@@ -191,7 +192,7 @@ export default function AddRecipe(props) {
           setLoading(false)
         })
         alert('Recipe Added successefuly 👍')
-        return history.push('/R')
+        return history.push('Dashboard/R')
       })
       .catch((error) => {
         alert(error.message)

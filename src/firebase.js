@@ -2,6 +2,12 @@
 import { initializeApp } from "firebase/app"
 import {getFirestore} from'firebase/firestore'; 
 
+import { getAuth } from "firebase/auth";
+// I get it for make Social Login {
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+//}
+
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -22,9 +28,19 @@ const firebaseConfig = {
 
 // Initialize Firebase
  export const app = initializeApp(firebaseConfig);
+
+ const db = getFirestore(app);
+const auth = getAuth(app);
+// I made it from improt (firebase/compat/app) and (firebase/compat/auth) to make social login{
+firebase.initializeApp(firebaseConfig);
+
+const auth2 = firebase.auth();
+
+const google = new firebase.auth.GoogleAuthProvider();
+const facebook = new firebase.auth.FacebookAuthProvider();
+export { db, auth, auth2, google, facebook };
  
-const db = getFirestore(app)
-export { db } 
+
 
 
 

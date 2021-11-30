@@ -32,7 +32,7 @@ const Nav = () => {
             </button>
           ) : (
             <>
-              <Link to="/login">
+              <Link to="/">
                 <button className="login__btn nav__btn"> Login </button>
               </Link>
               <Link to="/register">

@@ -1,6 +1,11 @@
 
 import './App.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from './firebase'
+import { setUser } from './redux/authAction'
+import React,{useEffect} from 'react'
+import {useDispatch} from 'react-redux'
 import Loader from './Loader'
 import Dashboard from './pages/admin/Dashboard/Dashboard';
 import Login from './pages/auth/login/login';
@@ -13,6 +18,19 @@ import UserRout from "./components/admin/UserRout/UserRout";
 
 
 function App() {
+
+  
+    const dispatch = useDispatch()
+    // I made to sure if their user set hem not rediracte to login page
+    useEffect(() => {
+      onAuthStateChanged(auth, (authUser) => {
+        if (authUser) {
+          dispatch(setUser(authUser))
+        } else {
+          dispatch(setUser(null))
+        }
+      })
+    }, [dispatch])
   return (
     <div className='App'>
       <Router>

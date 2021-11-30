@@ -39,9 +39,17 @@ export default function Recipes() {
   }
 
   const deleteRecipe = async (id) => {
+    
+    if(prompt("You want to delete this")){
     const docRef = doc(db, 'recipes', id)
-    await deleteDoc(docRef)
+    await deleteDoc(docRef).then((data)=>{
+      alert("Done");
+    });
     console.log(deleteDoc(docRef).id)
+
+    }else{
+      return;
+    }
   }
 
   const url = '#'
@@ -65,14 +73,14 @@ export default function Recipes() {
       <table className='table  text-black table-hover'>
         <thead>
           <tr>
-            <th scope='col'>التسلسل</th>
-            <th scope='col'>اسم الوصفة</th>
-            <th scope='col'>طريقة التحضير</th>
-            <th scope='col'>المكونات</th>
-            <th scope='col'>درجة الصعوبة</th>
-            <th scope='col'>وقت الطهي</th>
-            <th scope='col'>التقييم</th>
-            <th scope='col'>الصورة</th>
+            <th scope='col'>Number</th>
+            <th scope='col'>Recipe Name </th>
+            <th scope='col'>Way Preperation</th>
+            <th scope='col'>Ingredents</th>
+            <th scope='col'> Degree</th>
+            <th scope='col'>Period </th>
+            <th scope='col'>Evaluation</th>
+            <th scope='col'>Image</th>
           </tr>
         </thead>
         <tbody>

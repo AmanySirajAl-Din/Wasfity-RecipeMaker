@@ -8,7 +8,9 @@ import { useHistory } from "react-router-dom";
 import {
   collection,
   onSnapshot,
-  addDoc 
+  addDoc ,
+  doc,
+  setDoc
   
 } from "firebase/firestore";
 
@@ -44,8 +46,8 @@ export default function EditIngredients() {
   //   });
 
   
-  const editHandel = (e) => {
-    e.preventDefault();
+  const editHandel = (id) => {
+   
         const docRef = doc(db, "Ingredients", id);
         const payload = {
             ingName:ingredientName,

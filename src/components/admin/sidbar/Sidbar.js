@@ -52,12 +52,12 @@ export default function Sidbar() {
           <li>
             <Link to="Users">Users</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="AddIngredCat">Active Users</Link>
           </li>
           <li>
             <Link to="AddIngredCat">Blocked Users</Link>
-          </li>
+          </li> */}
         </li>
         
         <li>

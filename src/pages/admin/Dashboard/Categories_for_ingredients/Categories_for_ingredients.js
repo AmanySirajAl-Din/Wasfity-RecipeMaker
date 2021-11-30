@@ -67,7 +67,7 @@ export default function Categories_for_ingredients() {
                   1
                 </th>
                 <td>{Category_of_ingredient.ingCatName}</td>
-                <Link to={`/Dashboard/EditIngredCat?id=${Category_of_ingredient.id}`}>
+                <Link to={`/Dashboard/EditIngredCat/${Category_of_ingredient.id}`}>
                 <td><button >Edit</button></td>
                   
                    </Link>

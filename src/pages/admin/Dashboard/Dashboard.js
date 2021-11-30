@@ -21,7 +21,8 @@ import NavAdmin from "../../../components/admin/navAdmin/NavAdmin";
 import User from './../../../pages/admin/Dashboard/users/User'
 import EditIngredCat from '../../../pages/admin/Dashboard/Categories_for_ingredients/EditIngredCat'
 import AddIngred from '../../../pages/admin/Dashboard/Ingredients/AddIngred'
-
+import EditIngredients from '../../../pages/admin/Dashboard/Ingredients/EditIngredients'
+import EditRecipes from "./recipes/EditRecipes";
 
 function Dashboard() {
   let { path, url } = useRouteMatch();
@@ -39,6 +40,7 @@ function Dashboard() {
               <Switch>
                 {/* <Route exact path='path' component={Recipes}></Route> */}
                 <Route exact path={`${path}R`} component={Recipes}></Route>
+                <Route exact path={`${path}EditRecipes`} component={EditRecipes}></Route>
                 <Route exact path={`${path}RC`} component={Category_of_recipes}></Route>
                 <Route exact path={`${path}addRecipe`} component={addRecipe}></Route>
                 <Route exact path={`${path}addRecipeCat`} component={AddRecipeCat}></Route>
@@ -49,7 +51,9 @@ function Dashboard() {
                
                 <Route exact path={`${path}Users`} component={User}></Route>
                 {/* <Route exact path={`${path}EditIngredients`} component={EditIngredients}></Route> */}
-                <Route exact path={`${path}EditIngredCat`} component={EditIngredCat}></Route>
+                <Route exact path={`${path}/:id`} component={EditIngredCat}></Route>
+                <Route exact path={`${path}EditIngredients`} component={EditIngredients}></Route>
+
                
               
               
